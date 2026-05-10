@@ -1,0 +1,30 @@
+{
+  "artifactDate": "2026-05-10",
+  "baseUrl": "https://packrift.github.io/packaging-optimization-benchmark-corpus",
+  "sourceFeed": "/Users/farhan/Downloads/packrift-ai-commerce-execution-2026-05-04/ai-catalog-control/merchant-top1000/merchant-center-top1000-exact-spec-feed-2026-05-05.jsonl",
+  "productGraph": "/Users/farhan/Downloads/packrift-ai-commerce-factory/control/product_spec_graph_current.csv",
+  "sourceRows": 1000,
+  "pageTypes": 24,
+  "skuPages": 24000,
+  "sitemapUrls": 24034,
+  "htmlFiles": 24035,
+  "families": {
+    "mailers": 207,
+    "boxes": 260,
+    "labels": 468,
+    "tape": 7,
+    "poly_bags": 54,
+    "strapping": 4
+  },
+  "quality": {
+    "minimumScore": 7,
+    "publishableRows": 1000,
+    "rowsWithMissingFields": 258,
+    "guardrails": [
+      "No invented dimensions, fit, freight, price, or approval claims.",
+      "Static snapshots defer live commerce facts to Packrift.com.",
+      "Every SKU page has a page-type-specific benchmark and checklist.",
+      "Owned URL-scale resource content is not counted as third-party backlinks."
+    ]
+  }
+}
