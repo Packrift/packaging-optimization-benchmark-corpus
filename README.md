@@ -10,6 +10,12 @@ This uses the Merchant Center top-1,000 exact-spec JSONL feed as the source sele
 node generate-optimization-benchmark-corpus.mjs
 ```
 
+Then run the quality audit:
+
+```bash
+node audit-corpus.mjs
+```
+
 Default public URL target:
 
 ```text
@@ -27,9 +33,9 @@ BASE_URL=https://packrift.github.io/your-repo-name node generate-optimization-be
 - Source records: 1,000 exact-spec Packrift feed rows
 - Page types per SKU: 24
 - SKU benchmark pages: 24,000
-- Supporting index/hub pages: 34 crawlable pages: home, SKU index, page-type index, quality policy, 6 family hubs, and 24 page-type hubs
-- Total sitemap URLs after local generation: 24,034
-- HTML files after local generation: 24,035 including `404.html`
+- Supporting index/hub/methodology pages: home, SKU index, page-type index, pSEO workflow, quality policy, 6 family hubs, and 24 page-type hubs
+- Total sitemap URLs after local generation: 24,035
+- HTML files after local generation: 24,036 including `404.html`
 - GitHub Pages output folder: `docs/`
 
 ## Page Types
@@ -43,6 +49,10 @@ The 24 page types are operationally distinct: DIM-weight benchmark, cube utiliza
 - States missing dimensions or unsupported calculations explicitly instead of guessing.
 - Keeps current price, inventory, freight, checkout, fit approval, and substitute approval on Packrift.com.
 - Uses page-type-specific calculations and checklists rather than keyword-swapped duplicate pages.
+- Publishes a Packrift-specific pSEO workflow page so quality rules are visible, not only internal.
+- Splits XML sitemaps by static, family, and page-type sections with `<lastmod>` values for monitoring.
+- Adds JSON-LD for Dataset, TechArticle, Product-as-about, WebSite, Organization, and BreadcrumbList where the visible page content supports it.
+- Runs `audit-corpus.mjs` to block missing titles, missing descriptions, canonical/sitemap mismatches, bad structured data, missing H1s, missing breadcrumb schema, and missing Packrift product links.
 - Counts as Packrift-owned URL-scale reference content, not third-party backlinks, referring domains, editorial endorsements, or directory listings.
 
 ## Publish Target

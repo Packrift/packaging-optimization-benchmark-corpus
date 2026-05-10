@@ -9,6 +9,13 @@ const outDir = path.join(root, "docs");
 const baseUrl = (process.env.BASE_URL || "https://packrift.github.io/packaging-optimization-benchmark-corpus").replace(/\/+$/, "");
 const rowLimit = Number(process.env.PAGE_ROW_LIMIT || 1000);
 const artifactDate = "2026-05-10";
+const indexNowKey = "5050e763abb8dafdc736a5971e107171";
+const googleGuidance = {
+  helpfulContent: "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+  spamPolicies: "https://developers.google.com/search/docs/essentials/spam-policies",
+  sitemaps: "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
+  structuredData: "https://developers.google.com/search/docs/appearance/structured-data/sd-policies",
+};
 
 const pageTypes = [
   ["dimensional-weight-benchmark", "Dimensional Weight Benchmark", "Screen whether listed dimensions can create parcel DIM-weight exposure before a buyer standardizes a SKU."],
@@ -489,10 +496,49 @@ function list(items) {
 }
 
 function css() {
-  return `:root{color-scheme:light;--ink:#17201b;--muted:#5d6a61;--line:#d9e3dc;--bg:#f7faf8;--panel:#fff;--accent:#0f6b55;--accent2:#8a4b0f}*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}.wrap{width:min(1120px,calc(100% - 32px));margin:0 auto}header,footer{background:#fff;border-bottom:1px solid var(--line)}footer{border-top:1px solid var(--line);border-bottom:0;color:var(--muted);font-size:14px;padding:22px 0}.top{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:18px 0}.brand{font-weight:760;color:var(--ink)}nav{display:flex;gap:14px;flex-wrap:wrap;font-size:14px}main{padding:34px 0 56px}.hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);gap:22px;align-items:start;margin-bottom:24px}h1{font-size:clamp(32px,4vw,56px);line-height:1.03;letter-spacing:0;margin:0 0 14px}h2{font-size:24px;line-height:1.2;margin:0 0 10px}h3{font-size:18px;margin:0 0 8px}p{margin:0 0 14px;color:var(--muted)}.panel,.card{background:var(--panel);border:1px solid var(--line);border-radius:8px}.panel{padding:20px;margin:16px 0}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:20px 0}.card{padding:18px;min-height:124px}.meta{display:grid;gap:10px;font-size:14px}.meta div{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #edf2ee;padding-bottom:8px}.meta div:last-child{border-bottom:0;padding-bottom:0}.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}.button{display:inline-flex;min-height:40px;align-items:center;justify-content:center;border:1px solid var(--accent);border-radius:7px;background:var(--accent);color:#fff;font-weight:650;padding:0 14px}.button.secondary{background:#fff;color:var(--accent)}table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);margin:12px 0}th,td{text-align:left;vertical-align:top;border-bottom:1px solid var(--line);padding:10px 12px}th{width:210px;background:#eef6f3}ul{margin:10px 0 0;padding-left:20px}li{margin:5px 0}.small{font-size:14px;color:var(--muted)}.badge{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:3px 9px;background:#fff;color:var(--muted);font-size:13px;margin:0 6px 6px 0}@media(max-width:820px){.hero,.grid{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}h1{font-size:34px}th{width:auto}}`;
+  return `:root{color-scheme:light;--ink:#17201b;--muted:#5d6a61;--line:#d9e3dc;--bg:#f7faf8;--panel:#fff;--accent:#0f6b55;--accent2:#8a4b0f}*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}.wrap{width:min(1120px,calc(100% - 32px));margin:0 auto}header,footer{background:#fff;border-bottom:1px solid var(--line)}footer{border-top:1px solid var(--line);border-bottom:0;color:var(--muted);font-size:14px;padding:22px 0}.top{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:18px 0}.brand{font-weight:760;color:var(--ink)}nav{display:flex;gap:14px;flex-wrap:wrap;font-size:14px}main{padding:28px 0 56px}.breadcrumbs{font-size:13px;color:var(--muted);margin:0 0 18px}.breadcrumbs a{color:var(--muted)}.breadcrumbs span{margin:0 6px}.hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);gap:22px;align-items:start;margin-bottom:24px}h1{font-size:clamp(32px,4vw,56px);line-height:1.03;letter-spacing:0;margin:0 0 14px}h2{font-size:24px;line-height:1.2;margin:0 0 10px}h3{font-size:18px;margin:0 0 8px}p{margin:0 0 14px;color:var(--muted)}.panel,.card{background:var(--panel);border:1px solid var(--line);border-radius:8px}.panel{padding:20px;margin:16px 0}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:20px 0}.card{padding:18px;min-height:124px}.meta{display:grid;gap:10px;font-size:14px}.meta div{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid #edf2ee;padding-bottom:8px}.meta div:last-child{border-bottom:0;padding-bottom:0}.links{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}.button{display:inline-flex;min-height:40px;align-items:center;justify-content:center;border:1px solid var(--accent);border-radius:7px;background:var(--accent);color:#fff;font-weight:650;padding:0 14px}.button.secondary{background:#fff;color:var(--accent)}table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);margin:12px 0}th,td{text-align:left;vertical-align:top;border-bottom:1px solid var(--line);padding:10px 12px}th{width:210px;background:#eef6f3}ul{margin:10px 0 0;padding-left:20px}li{margin:5px 0}.small{font-size:14px;color:var(--muted)}.badge{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:3px 9px;background:#fff;color:var(--muted);font-size:13px;margin:0 6px 6px 0}.notice{border-left:4px solid var(--accent);padding:12px 14px;background:#eef6f3;color:var(--ink);border-radius:4px;margin:14px 0}.code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;background:#eef3ef;border:1px solid var(--line);border-radius:4px;padding:1px 5px}@media(max-width:820px){.hero,.grid{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}h1{font-size:34px}th{width:auto}}`;
 }
 
-function pageShell({ title, description, canonical, body, schema }) {
+function breadcrumbHtml(items = []) {
+  if (!items.length) return "";
+  return `<nav class="breadcrumbs" aria-label="Breadcrumb">${items.map((item, index) => {
+    const label = esc(item.name);
+    const node = index === items.length - 1 ? `<strong>${label}</strong>` : `<a href="${esc(item.url)}">${label}</a>`;
+    return `${index ? "<span>/</span>" : ""}${node}`;
+  }).join("")}</nav>`;
+}
+
+function breadcrumbSchema(items = []) {
+  if (!items.length) return null;
+  return {
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  };
+}
+
+function graphSchema(nodes) {
+  const clean = nodes.filter(Boolean);
+  return clean.length ? { "@context": "https://schema.org", "@graph": clean } : null;
+}
+
+function pageShell({ title, description, canonical, body, schema, breadcrumbs = [] }) {
+  const schemaPayload = schema || graphSchema([
+    {
+      "@type": "WebPage",
+      name: title,
+      description,
+      url: canonical,
+      datePublished: artifactDate,
+      dateModified: artifactDate,
+      publisher: { "@type": "Organization", name: "Packrift", url: "https://packrift.com/" },
+    },
+    breadcrumbSchema(breadcrumbs),
+  ]);
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -500,13 +546,14 @@ function pageShell({ title, description, canonical, body, schema }) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${esc(title)}</title>
   <meta name="description" content="${esc(description)}">
+  <meta name="robots" content="index,follow">
   <link rel="canonical" href="${esc(canonical)}">
   <link rel="stylesheet" href="${baseUrl}/assets/site.css">
-  ${schema ? `<script type="application/ld+json">${JSON.stringify(schema)}</script>` : ""}
+  ${schemaPayload ? `<script type="application/ld+json">${JSON.stringify(schemaPayload)}</script>` : ""}
 </head>
 <body>
-  <header><div class="wrap top"><a class="brand" href="${baseUrl}/">Packrift optimization benchmark corpus</a><nav><a href="${baseUrl}/sku-index.html">SKU index</a><a href="${baseUrl}/page-types.html">Page types</a><a href="${baseUrl}/quality-policy.html">Quality policy</a><a href="${baseUrl}/sitemap.xml">Sitemap</a><a href="https://packrift.com/">Packrift.com</a></nav></div></header>
-  <main class="wrap">${body}</main>
+  <header><div class="wrap top"><a class="brand" href="${baseUrl}/">Packrift optimization benchmark corpus</a><nav><a href="${baseUrl}/sku-index.html">SKU index</a><a href="${baseUrl}/page-types.html">Page types</a><a href="${baseUrl}/programmatic-seo-workflow.html">pSEO workflow</a><a href="${baseUrl}/quality-policy.html">Quality policy</a><a href="${baseUrl}/sitemap.xml">Sitemap</a><a href="https://packrift.com/">Packrift.com</a></nav></div></header>
+  <main class="wrap">${breadcrumbHtml(breadcrumbs)}${body}</main>
   <footer><div class="wrap">Packrift-owned benchmark/reference content. Static source snapshots are not live price, inventory, freight, or substitute approvals; verify on Packrift.com before buying or publishing downstream claims.</div></footer>
 </body>
 </html>
@@ -519,26 +566,87 @@ function writeFile(rel, content, urls = null) {
   fs.writeFileSync(filePath, content);
   if (urls && rel.endsWith(".html") && rel !== "404.html") {
     const urlPath = rel === "index.html" ? "" : rel.replace(/\/index\.html$/, "/");
-    urls.push(`${baseUrl}/${urlPath.replace(/\\/g, "/")}`);
+    urls.push({ loc: `${baseUrl}/${urlPath.replace(/\\/g, "/")}`, rel });
   }
 }
 
 function schemaFor(row, type, canonical, description) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    headline: `${row.title} ${type.label}`,
-    description,
-    mainEntityOfPage: canonical,
-    publisher: { "@type": "Organization", name: "Packrift", url: "https://packrift.com/" },
-    about: {
+  const org = { "@type": "Organization", name: "Packrift", url: "https://packrift.com/" };
+  return graphSchema([
+    {
+      "@type": "TechArticle",
+      headline: `${row.title} ${type.label}`,
+      description,
+      datePublished: artifactDate,
+      dateModified: artifactDate,
+      author: org,
+      publisher: org,
+      mainEntityOfPage: canonical,
+      about: {
+        "@type": "Product",
+        name: row.title,
+        sku: row.sku,
+        url: row.productUrl,
+        brand: { "@type": "Brand", name: "Packrift" },
+        additionalProperty: [
+          { "@type": "PropertyValue", name: "Family", value: row.familyLabel },
+          { "@type": "PropertyValue", name: "Source dimensions", value: row.dimensions.display || "Not listed" },
+          { "@type": "PropertyValue", name: "Pack count", value: row.packCount ? `${round(row.packCount, 0)} ct` : "Not listed" },
+        ],
+      },
+    },
+    breadcrumbSchema([
+      { name: "Benchmark corpus", url: `${baseUrl}/` },
+      { name: type.label, url: `${baseUrl}/${type.id}/` },
+      { name: row.sku, url: canonical },
+    ]),
+  ]);
+}
+
+function corpusSchema(canonical, description, rows) {
+  const org = { "@type": "Organization", name: "Packrift", url: "https://packrift.com/" };
+  return graphSchema([
+    {
+      "@type": "Dataset",
+      name: "Packrift optimization benchmark corpus",
+      description,
+      url: canonical,
+      datePublished: artifactDate,
+      dateModified: artifactDate,
+      creator: org,
+      publisher: org,
+      isAccessibleForFree: true,
+      measurementTechnique: "Static generation from Packrift exact-spec source feed and product spec graph",
+      variableMeasured: ["SKU", "dimensions", "weight", "pack count", "family", "quality score", "benchmark type"],
+      distribution: [
+        {
+          "@type": "DataDownload",
+          name: "Quality ledger CSV",
+          encodingFormat: "text/csv",
+          contentUrl: `${baseUrl}/data/quality-ledger.csv`,
+        },
+        {
+          "@type": "DataDownload",
+          name: "Corpus manifest JSON",
+          encodingFormat: "application/json",
+          contentUrl: `${baseUrl}/data/manifest.json`,
+        },
+      ],
+      about: rows.slice(0, 25).map((row) => ({
       "@type": "Product",
       name: row.title,
       sku: row.sku,
       url: row.productUrl,
       brand: { "@type": "Brand", name: "Packrift" },
+      })),
     },
-  };
+    {
+      "@type": "WebSite",
+      name: "Packrift optimization benchmark corpus",
+      url: `${baseUrl}/`,
+      publisher: org,
+    },
+  ]);
 }
 
 function relatedRows(row, rows) {
@@ -588,7 +696,18 @@ function skuPage(row, type, allRows) {
     <section class="panel"><h2>Quality guardrails</h2>${list(["Static source snapshots are not live price, inventory, freight, or final substitute approval.", "Missing dimensions or metrics are called out directly instead of guessed.", "Every page links to the canonical Packrift product page and keeps Packrift.com as the commerce source of truth."])}</section>
     <section class="panel"><h2>Related same-family references</h2><ul>${related.map((r) => `<li><a href="${baseUrl}/${type.id}/${r.slug}.html">${esc(r.sku)} - ${esc(r.title)}</a></li>`).join("\n")}</ul></section>
   `;
-  return pageShell({ title: `${row.title} ${type.label} | Packrift`, description, canonical, body, schema: schemaFor(row, type, canonical, description) });
+  return pageShell({
+    title: `${row.title} ${type.label} | Packrift`,
+    description,
+    canonical,
+    body,
+    schema: schemaFor(row, type, canonical, description),
+    breadcrumbs: [
+      { name: "Benchmark corpus", url: `${baseUrl}/` },
+      { name: type.label, url: `${baseUrl}/${type.id}/` },
+      { name: row.sku, url: canonical },
+    ],
+  });
 }
 
 function buildHome(rows, urls, families) {
@@ -598,7 +717,7 @@ function buildHome(rows, urls, families) {
       <section>
         <h1>Packrift optimization benchmark corpus</h1>
         <p>A GitHub Pages-ready corpus concept that turns 1,000 exact-spec Packrift feed records into ${totalSkuPages.toLocaleString("en-US")} SKU-specific benchmark pages across ${pageTypes.length} operational page types. It is built for buyers, warehouse teams, AI retrieval, and packaging ops workflows, not thin keyword swaps.</p>
-        <div class="links"><a class="button" href="${baseUrl}/page-types.html">Browse page types</a><a class="button secondary" href="${baseUrl}/sku-index.html">Browse SKUs</a><a class="button secondary" href="${baseUrl}/quality-policy.html">Quality policy</a></div>
+        <div class="links"><a class="button" href="${baseUrl}/page-types.html">Browse page types</a><a class="button secondary" href="${baseUrl}/sku-index.html">Browse SKUs</a><a class="button secondary" href="${baseUrl}/programmatic-seo-workflow.html">Review pSEO workflow</a></div>
       </section>
       <aside class="panel meta">
         <div><strong>Source records</strong><span>${rows.length.toLocaleString("en-US")}</span></div>
@@ -608,10 +727,18 @@ function buildHome(rows, urls, families) {
       </aside>
     </div>
     <section class="panel"><h2>Corpus concept</h2><p>Each SKU gets one page per operational benchmark: DIM weight, cube, fit, routing, material compatibility, reorder, bulk quote prep, AI retrieval, QA exceptions, and implementation handoff. The pages expose source facts, calculations, missing-field caveats, and Packrift product links.</p></section>
+    <section class="panel"><h2>Data access</h2><p>The public source ledger and manifest make the corpus auditable instead of opaque.</p><div class="links"><a class="button secondary" href="${baseUrl}/data/quality-ledger.csv">Quality ledger CSV</a><a class="button secondary" href="${baseUrl}/data/manifest.json">Manifest JSON</a><a class="button secondary" href="${baseUrl}/sitemap.xml">Sitemap index</a></div></section>
     <div class="grid">${pageTypes.slice(0, 9).map((type) => `<article class="card"><h2>${esc(type.label)}</h2><p>${esc(type.intent)}</p><p><a href="${baseUrl}/${type.id}/">Open hub</a></p></article>`).join("\n")}</div>
     <section class="panel"><h2>Family mix</h2>${table(Object.entries(families).map(([family, count]) => [familyName(family), `${count.toLocaleString("en-US")} source records`]))}</section>
   `;
-  writeFile("index.html", pageShell({ title: "Packrift optimization benchmark corpus", description: "GitHub Pages-ready Packrift optimization benchmark corpus generated from the top-1000 exact-spec feed.", canonical: `${baseUrl}/`, body }), urls);
+  const description = "Packrift optimization benchmark corpus generated from the top-1000 exact-spec feed, with public quality ledgers and operational benchmark pages.";
+  writeFile("index.html", pageShell({
+    title: "Packrift optimization benchmark corpus",
+    description,
+    canonical: `${baseUrl}/`,
+    body,
+    schema: corpusSchema(`${baseUrl}/`, description, rows),
+  }), urls);
 }
 
 function buildIndexes(rows, urls, families) {
@@ -635,7 +762,43 @@ function buildIndexes(rows, urls, families) {
     title: "Packrift benchmark corpus quality policy",
     description: "Quality safeguards for the Packrift optimization benchmark corpus.",
     canonical: `${baseUrl}/quality-policy.html`,
-    body: `<h1>Quality policy</h1><section class="panel"><h2>Generation gates</h2>${list(["Requires 1,000 exact-spec feed rows, matching product graph rows, canonical product URLs, product details, highlights, weight, and source labels.", "Generates explicit missing-field language instead of invented dimensions, freight, fit, pallet, or price claims.", "Keeps live commerce, price, inventory, checkout, and approval decisions on Packrift.com.", "Uses 24 distinct benchmark types with different formulas and operational checklists, not only swapped keywords.", "Counts as Packrift-owned URL-scale reference content, not third-party backlinks or independent referring domains."])}</section><section class="panel"><h2>Source treatment</h2><p>The Merchant Center top-1000 exact-spec feed is the source selection. The local product graph is joined only for SKU, title, handle, product URL, price snapshot, and inventory snapshot so pages can point to the correct Packrift product.</p></section>`,
+    body: `<h1>Quality policy</h1><section class="panel"><h2>Generation gates</h2>${list(["Requires 1,000 exact-spec feed rows, matching product graph rows, canonical product URLs, product details, highlights, weight, and source labels.", "Generates explicit missing-field language instead of invented dimensions, freight, fit, pallet, or price claims.", "Keeps live commerce, price, inventory, checkout, and approval decisions on Packrift.com.", "Uses 24 distinct benchmark types with different formulas and operational checklists, not only swapped keywords.", "Counts as Packrift-owned URL-scale reference content, not third-party backlinks or independent referring domains."])}</section><section class="panel"><h2>Source treatment</h2><p>The Merchant Center top-1000 exact-spec feed is the source selection. The local product graph is joined only for SKU, title, handle, product URL, price snapshot, and inventory snapshot so pages can point to the correct Packrift product.</p></section><section class="panel"><h2>Search policy treatment</h2>${list(["The corpus is built as Packrift-owned reference content, not automated third-party link creation.", "The generator blocks rows without product URL enrichment and publishes missing-field caveats visibly.", "Static pages do not mark up live offers, reviews, ratings, freight, or availability because those facts belong on Packrift.com."])}</section>`,
+  }), urls);
+
+  writeFile("programmatic-seo-workflow.html", pageShell({
+    title: "Packrift programmatic SEO workflow",
+    description: "The Packrift operating standard for source-backed programmatic SEO pages, crawl management, schema, and quality monitoring.",
+    canonical: `${baseUrl}/programmatic-seo-workflow.html`,
+    body: `<h1>Packrift programmatic SEO workflow</h1>
+      <p class="notice">This is the operating standard for Packrift-owned programmatic pages. It exists to prevent thin-content scale, fake authority, unsupported claims, and link-spam accounting.</p>
+      <section class="panel"><h2>1. Source authority gate</h2>${list(["Use first-party Packrift source feeds, product spec graphs, calculators, or directly verified public product pages.", "Require a canonical Packrift product URL or public source URL before a page can be indexable.", "Record weak fields in the quality ledger instead of filling gaps with generated claims."])}</section>
+      <section class="panel"><h2>2. Intent matrix</h2>${list(["Each page type must answer a distinct job: fit, DIM weight, slotting, receiving, QA, reorder, AI retrieval, or implementation handoff.", "Do not create pages only because a keyword permutation exists.", "Treat page types that collapse into the same user task as candidates for consolidation."])}</section>
+      <section class="panel"><h2>3. Template differentiation</h2>${list(["Every page needs unique title, description, H1, source facts, computed metrics, checklist, and same-family links.", "A page is allowed to state that data is missing; it is not allowed to invent dimensions, price, fit, pallet count, freight, or approval status.", "Low-information rows should be upgraded from source data or removed from indexable output."])}</section>
+      <section class="panel"><h2>4. Crawl architecture</h2>${list(["Keep every page reachable through HTML hubs and XML sitemaps.", "Use canonical URLs, visible breadcrumbs, and sitemap lastmod dates.", "Split sitemaps by static, family, and page-type sections so Search Console/Bing feedback can be read by pattern."])}</section>
+      <section class="panel"><h2>5. Structured data discipline</h2>${list(["Use JSON-LD only when it reflects visible page content.", "Use TechArticle, Dataset, Product-as-about, WebSite, Organization, and BreadcrumbList where accurate.", "Do not use Offer, AggregateRating, Review, or merchant listing markup on static reference pages unless the exact visible live commerce facts are present and maintained."])}</section>
+      <section class="panel"><h2>6. Launch and monitoring</h2>${list(["Publish only after the automated quality audit passes.", "Submit sitemap indexes where the property is verified, and use IndexNow only for genuinely new or meaningfully updated URLs.", "Monitor indexation, crawl errors, page-type performance, and query overlap before adding another corpus layer."])}</section>
+      <section class="panel"><h2>7. Ethical link accounting</h2>${list(["Owned GitHub Pages and Packrift-owned resources count as public crawlable presence, not third-party backlinks or referring domains.", "Pending GitHub pull requests, directory submissions, and resource listings stay pending until accepted.", "No paid links, reciprocal-link schemes, fake reviews, low-quality directories, automated comment links, or outreach emails are part of this workflow."])}</section>
+      <section class="panel"><h2>Reference guidance</h2><p>This workflow is aligned to Google Search guidance on helpful content, spam policies, sitemaps, and structured data.</p>${list([`Helpful content: ${googleGuidance.helpfulContent}`, `Spam policies: ${googleGuidance.spamPolicies}`, `Sitemap generation: ${googleGuidance.sitemaps}`, `Structured data: ${googleGuidance.structuredData}`])}</section>`,
+    schema: graphSchema([
+      {
+        "@type": "TechArticle",
+        headline: "Packrift programmatic SEO workflow",
+        description: "The Packrift operating standard for source-backed programmatic SEO pages, crawl management, schema, and quality monitoring.",
+        datePublished: artifactDate,
+        dateModified: artifactDate,
+        author: { "@type": "Organization", name: "Packrift", url: "https://packrift.com/" },
+        publisher: { "@type": "Organization", name: "Packrift", url: "https://packrift.com/" },
+        mainEntityOfPage: `${baseUrl}/programmatic-seo-workflow.html`,
+      },
+      breadcrumbSchema([
+        { name: "Benchmark corpus", url: `${baseUrl}/` },
+        { name: "pSEO workflow", url: `${baseUrl}/programmatic-seo-workflow.html` },
+      ]),
+    ]),
+    breadcrumbs: [
+      { name: "Benchmark corpus", url: `${baseUrl}/` },
+      { name: "pSEO workflow", url: `${baseUrl}/programmatic-seo-workflow.html` },
+    ],
   }), urls);
 
   for (const [family, count] of Object.entries(families)) {
@@ -664,8 +827,20 @@ function writeSupportFiles(urls, rows, families) {
   fs.mkdirSync(path.join(outDir, "assets"), { recursive: true });
   fs.writeFileSync(path.join(outDir, "assets/site.css"), css());
   fs.writeFileSync(path.join(outDir, ".nojekyll"), "");
+  fs.writeFileSync(path.join(outDir, `${indexNowKey}.txt`), `${indexNowKey}\n`);
   fs.writeFileSync(path.join(outDir, "robots.txt"), `User-agent: *\nAllow: /\nSitemap: ${baseUrl}/sitemap.xml\n`);
-  fs.writeFileSync(path.join(outDir, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((url) => `  <url><loc>${esc(url)}</loc></url>`).join("\n")}\n</urlset>\n`);
+  writeSitemaps(urls);
+  fs.writeFileSync(path.join(outDir, "llms.txt"), [
+    "# Packrift optimization benchmark corpus",
+    "",
+    `Public URL: ${baseUrl}/`,
+    "Purpose: source-backed Packrift packaging benchmark references for buyers, warehouse teams, AI retrieval, and packaging operations.",
+    "Source treatment: static source snapshots; verify live price, inventory, freight, checkout, and approval decisions on Packrift.com.",
+    `Manifest: ${baseUrl}/data/manifest.json`,
+    `Quality ledger: ${baseUrl}/data/quality-ledger.csv`,
+    `Programmatic SEO workflow: ${baseUrl}/programmatic-seo-workflow.html`,
+    "",
+  ].join("\n"));
   writeFile("404.html", pageShell({
     title: "Packrift benchmark page not found",
     description: "The requested Packrift benchmark page was not found.",
@@ -704,6 +879,39 @@ function writeSupportFiles(urls, rows, families) {
   };
   fs.writeFileSync(path.join(root, "manifest.json"), `${JSON.stringify(manifest, null, 2)}\n`);
   fs.writeFileSync(path.join(outDir, "data/manifest.json"), `${JSON.stringify(manifest, null, 2)}\n`);
+}
+
+function sitemapSlug(value) {
+  return slugify(value || "static").slice(0, 80) || "static";
+}
+
+function sitemapGroup(rel) {
+  if (rel === "index.html" || !rel.includes("/")) return "static";
+  const [first] = rel.split("/");
+  if (first === "family") return "family";
+  return first;
+}
+
+function sitemapUrlXml(entries) {
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${entries.map((entry) => `  <url><loc>${esc(entry.loc)}</loc><lastmod>${artifactDate}</lastmod></url>`).join("\n")}\n</urlset>\n`;
+}
+
+function writeSitemaps(urls) {
+  const sitemapDir = path.join(outDir, "sitemaps");
+  fs.mkdirSync(sitemapDir, { recursive: true });
+  const groups = new Map();
+  for (const entry of urls) {
+    const group = sitemapGroup(entry.rel);
+    if (!groups.has(group)) groups.set(group, []);
+    groups.get(group).push(entry);
+  }
+  const sitemapFiles = [...groups.entries()].map(([group, entries]) => {
+    const file = `sitemaps/${sitemapSlug(group)}.xml`;
+    fs.writeFileSync(path.join(outDir, file), sitemapUrlXml(entries));
+    return `${baseUrl}/${file}`;
+  });
+  fs.writeFileSync(path.join(outDir, "sitemap-all.xml"), sitemapUrlXml(urls));
+  fs.writeFileSync(path.join(outDir, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapFiles.map((loc) => `  <sitemap><loc>${esc(loc)}</loc><lastmod>${artifactDate}</lastmod></sitemap>`).join("\n")}\n  <sitemap><loc>${baseUrl}/sitemap-all.xml</loc><lastmod>${artifactDate}</lastmod></sitemap>\n</sitemapindex>\n`);
 }
 
 function loadRows() {

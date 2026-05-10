@@ -1,0 +1,8 @@
+# Packrift optimization benchmark corpus
+
+Public URL: https://packrift.github.io/packaging-optimization-benchmark-corpus/
+Purpose: source-backed Packrift packaging benchmark references for buyers, warehouse teams, AI retrieval, and packaging operations.
+Source treatment: static source snapshots; verify live price, inventory, freight, checkout, and approval decisions on Packrift.com.
+Manifest: https://packrift.github.io/packaging-optimization-benchmark-corpus/data/manifest.json
+Quality ledger: https://packrift.github.io/packaging-optimization-benchmark-corpus/data/quality-ledger.csv
+Programmatic SEO workflow: https://packrift.github.io/packaging-optimization-benchmark-corpus/programmatic-seo-workflow.html
