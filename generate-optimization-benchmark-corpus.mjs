@@ -552,9 +552,9 @@ function pageShell({ title, description, canonical, body, schema, breadcrumbs = 
   ${schemaPayload ? `<script type="application/ld+json">${JSON.stringify(schemaPayload)}</script>` : ""}
 </head>
 <body>
-  <header><div class="wrap top"><a class="brand" href="${baseUrl}/">Packrift optimization benchmark corpus</a><nav><a href="${baseUrl}/sku-index.html">SKU index</a><a href="${baseUrl}/page-types.html">Page types</a><a href="${baseUrl}/programmatic-seo-workflow.html">pSEO workflow</a><a href="${baseUrl}/quality-policy.html">Quality policy</a><a href="${baseUrl}/sitemap.xml">Sitemap</a><a href="https://packrift.com/">Packrift.com</a></nav></div></header>
+  <header><div class="wrap top"><a class="brand" href="${baseUrl}/">Packrift optimization benchmark corpus</a><nav><a href="${baseUrl}/sku-index.html">SKU index</a><a href="${baseUrl}/page-types.html">Page types</a><a href="${baseUrl}/programmatic-seo-workflow.html">pSEO workflow</a><a href="${baseUrl}/quality-policy.html">Quality policy</a><a href="${baseUrl}/sitemap.xml">Sitemap</a><a href="https://packrift.com/pages/tools">Packaging tools</a><a href="https://packrift.com/">Packrift.com</a></nav></div></header>
   <main class="wrap">${breadcrumbHtml(breadcrumbs)}${body}</main>
-  <footer><div class="wrap">Packrift-owned benchmark/reference content. Static source snapshots are not live price, inventory, freight, or substitute approvals; verify on Packrift.com before buying or publishing downstream claims.</div></footer>
+  <footer><div class="wrap">Packrift-owned benchmark/reference content. Static source snapshots are not live price, inventory, freight, or substitute approvals; use the <a href="https://packrift.com/pages/tools">Packrift packaging tools hub</a> and verify on Packrift.com before buying or publishing downstream claims.</div></footer>
 </body>
 </html>
 `;
