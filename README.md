@@ -1,8 +1,14 @@
-# Packrift Optimization Benchmark Corpus
+# Packrift Packaging Optimization Benchmark Corpus
 
-GitHub Pages-ready static corpus concept for Packrift-owned packaging optimization references.
+Public Packrift-owned packaging optimization benchmark corpus for SKU-specific DIM, fit, cost, routing, and warehouse planning references.
 
-This uses the Merchant Center top-1,000 exact-spec JSONL feed as the source selection and joins the local product spec graph only to recover SKU, title, handle, product URL, price snapshot, and inventory snapshot. The generator does not publish anything.
+The live corpus is published at:
+
+```text
+https://packrift.github.io/packaging-optimization-benchmark-corpus/
+```
+
+This uses the Merchant Center top-1,000 exact-spec JSONL feed as the source selection and joins the local product spec graph only to recover SKU, title, handle, product URL, price snapshot, and inventory snapshot. Current commerce facts, checkout, inventory, freight, and approval decisions stay on Packrift.com.
 
 ## Generate
 
@@ -37,6 +43,14 @@ BASE_URL=https://packrift.github.io/your-repo-name node generate-optimization-be
 - Total sitemap URLs after local generation: 24,035
 - HTML files after local generation: 24,036 including `404.html`
 - GitHub Pages output folder: `docs/`
+- Data evidence files: `quality-ledger.csv`, `manifest.json`, and `seo-quality-audit.json`
+
+## Dataset Files
+
+- `quality-ledger.csv` - SKU-level source ledger with offer IDs, families, source Packrift product URLs, quality scores, and missing-field flags.
+- `manifest.json` - generation manifest with source-row counts, family counts, page-type counts, sitemap counts, and quality guardrails.
+- `seo-quality-audit.json` - static audit report covering title/description duplication, canonical/sitemap agreement, structured data, breadcrumbs, and Packrift product-link coverage.
+- `docs/` - generated HTML corpus and sitemap files served by GitHub Pages.
 
 ## Page Types
 
@@ -55,8 +69,12 @@ The 24 page types are operationally distinct: DIM-weight benchmark, cube utiliza
 - Runs `audit-corpus.mjs` to block missing titles, missing descriptions, canonical/sitemap mismatches, bad structured data, missing H1s, missing breadcrumb schema, and missing Packrift product links.
 - Counts as Packrift-owned URL-scale reference content, not third-party backlinks, referring domains, editorial endorsements, or directory listings.
 
-## Publish Target
+## Release / Citation
 
-If approved later, create a public GitHub repository and serve GitHub Pages from `/docs` on `main`.
+Use the GitHub release archive for versioned citation and third-party dataset submissions. This corpus does not claim independent editorial endorsement; it is an owned public resource and benchmark dataset published by Packrift.
 
-Do not publish this draft automatically.
+Suggested citation:
+
+```text
+Packrift. Packrift Packaging Optimization Benchmark Corpus. GitHub repository and dataset archive. https://github.com/Packrift/packaging-optimization-benchmark-corpus
+```

@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If this corpus is useful, cite the Packrift Packaging Optimization Benchmark Corpus."
+title: "Packrift Packaging Optimization Benchmark Corpus"
+type: dataset
+authors:
+  - name: "Packrift"
+abstract: "A Packrift-owned public benchmark corpus generated from 1,000 exact-spec packaging product records, with 24,000 SKU-level optimization benchmark pages and supporting quality-audit artifacts."
+repository-code: "https://github.com/Packrift/packaging-optimization-benchmark-corpus"
+url: "https://packrift.github.io/packaging-optimization-benchmark-corpus/"
+date-released: "2026-05-14"
+keywords:
+  - packaging
+  - ecommerce
+  - optimization
+  - dimensional weight
+  - warehouse operations
+  - benchmark corpus
