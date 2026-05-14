@@ -649,6 +649,51 @@ function corpusSchema(canonical, description, rows) {
   ]);
 }
 
+function metadataFileList() {
+  return [
+    ["Frictionless Data Package", "data/datapackage.json", "application/json", "Portable dataset descriptor for the source ledger, manifest, and audit files."],
+    ["MLCommons Croissant", "data/croissant.json", "application/json", "Machine learning dataset metadata for discovery and future platform distribution."],
+    ["schema.org Dataset JSON-LD", "data/schema-dataset.jsonld", "application/ld+json", "Standalone structured-data record for crawlers and archive platforms."],
+    ["DataCite JSON", "data/datacite.json", "application/json", "Citation-oriented metadata for DOI/archive preparation."],
+    ["RO-Crate", "data/ro-crate-metadata.json", "application/ld+json", "Research Object Crate metadata tying the corpus, files, and Packrift publisher record together."],
+    ["Kaggle metadata draft", "data/kaggle-dataset-metadata-draft.json", "application/json", "Draft upload metadata; publication still requires a license decision and Kaggle auth."],
+  ].map(([label, rel, format, description]) => ({
+    label,
+    rel,
+    url: `${baseUrl}/${rel}`,
+    format,
+    description,
+  }));
+}
+
+function metadataIndexSchema(canonical, description) {
+  const org = { "@type": "Organization", name: "Packrift", url: "https://packrift.com/" };
+  return graphSchema([
+    {
+      "@type": "Dataset",
+      name: "Packrift Packaging Optimization Benchmark Corpus metadata",
+      description,
+      url: canonical,
+      datePublished: artifactDate,
+      dateModified: artifactDate,
+      creator: org,
+      publisher: org,
+      isAccessibleForFree: true,
+      distribution: metadataFileList().map((file) => ({
+        "@type": "DataDownload",
+        name: file.label,
+        encodingFormat: file.format,
+        contentUrl: file.url,
+      })),
+      conditionsOfAccess: "Public Packrift-published reference corpus. No separate open-data license is declared in this release.",
+    },
+    breadcrumbSchema([
+      { name: "Benchmark corpus", url: `${baseUrl}/` },
+      { name: "Dataset metadata", url: canonical },
+    ]),
+  ]);
+}
+
 function relatedRows(row, rows) {
   const target = row.metrics.volume || row.metrics.area || row.weight || 0;
   return rows
@@ -727,7 +772,7 @@ function buildHome(rows, urls, families) {
       </aside>
     </div>
     <section class="panel"><h2>Corpus concept</h2><p>Each SKU gets one page per operational benchmark: DIM weight, cube, fit, routing, material compatibility, reorder, bulk quote prep, AI retrieval, QA exceptions, and implementation handoff. The pages expose source facts, calculations, missing-field caveats, and Packrift product links.</p></section>
-    <section class="panel"><h2>Data access</h2><p>The public source ledger and manifest make the corpus auditable instead of opaque.</p><div class="links"><a class="button secondary" href="${baseUrl}/data/quality-ledger.csv">Quality ledger CSV</a><a class="button secondary" href="${baseUrl}/data/manifest.json">Manifest JSON</a><a class="button secondary" href="${baseUrl}/sitemap.xml">Sitemap index</a></div></section>
+    <section class="panel"><h2>Data access</h2><p>The public source ledger, manifest, metadata, and sitemap make the corpus auditable instead of opaque.</p><div class="links"><a class="button secondary" href="${baseUrl}/data/quality-ledger.csv">Quality ledger CSV</a><a class="button secondary" href="${baseUrl}/data/manifest.json">Manifest JSON</a><a class="button secondary" href="${baseUrl}/dataset-metadata.html">Dataset metadata</a><a class="button secondary" href="${baseUrl}/sitemap.xml">Sitemap index</a></div></section>
     <div class="grid">${pageTypes.slice(0, 9).map((type) => `<article class="card"><h2>${esc(type.label)}</h2><p>${esc(type.intent)}</p><p><a href="${baseUrl}/${type.id}/">Open hub</a></p></article>`).join("\n")}</div>
     <section class="panel"><h2>Family mix</h2>${table(Object.entries(families).map(([family, count]) => [familyName(family), `${count.toLocaleString("en-US")} source records`]))}</section>
   `;
@@ -798,6 +843,20 @@ function buildIndexes(rows, urls, families) {
     breadcrumbs: [
       { name: "Benchmark corpus", url: `${baseUrl}/` },
       { name: "pSEO workflow", url: `${baseUrl}/programmatic-seo-workflow.html` },
+    ],
+  }), urls);
+
+  const metadataRows = metadataFileList().map((file) => `<tr><td><a href="${file.url}">${esc(file.label)}</a></td><td>${esc(file.format)}</td><td>${esc(file.description)}</td></tr>`).join("\n");
+  const metadataDescription = "Machine-readable metadata files for the Packrift Packaging Optimization Benchmark Corpus, including Data Package, Croissant, schema.org, DataCite, RO-Crate, and Kaggle draft records.";
+  writeFile("dataset-metadata.html", pageShell({
+    title: "Packrift benchmark corpus dataset metadata",
+    description: metadataDescription,
+    canonical: `${baseUrl}/dataset-metadata.html`,
+    body: `<h1>Dataset metadata</h1><p>The corpus publishes standards-based metadata so search engines, archive platforms, and dataset tools can understand the source ledger without relying on a closed platform upload.</p><section class="panel"><h2>Metadata files</h2><table><thead><tr><th>File</th><th>Format</th><th>Purpose</th></tr></thead><tbody>${metadataRows}</tbody></table></section><section class="panel"><h2>License status</h2><p>No separate open-data license is declared in this release. Dataset-platform publication still requires a Packrift license decision plus account authentication where applicable.</p></section><section class="panel"><h2>Primary corpus files</h2><div class="links"><a class="button secondary" href="${baseUrl}/data/quality-ledger.csv">Quality ledger CSV</a><a class="button secondary" href="${baseUrl}/data/manifest.json">Manifest JSON</a><a class="button secondary" href="${baseUrl}/data/seo-quality-audit.json">SEO audit JSON</a></div></section>`,
+    schema: metadataIndexSchema(`${baseUrl}/dataset-metadata.html`, metadataDescription),
+    breadcrumbs: [
+      { name: "Benchmark corpus", url: `${baseUrl}/` },
+      { name: "Dataset metadata", url: `${baseUrl}/dataset-metadata.html` },
     ],
   }), urls);
 
@@ -879,6 +938,226 @@ function writeSupportFiles(urls, rows, families) {
   };
   fs.writeFileSync(path.join(root, "manifest.json"), `${JSON.stringify(manifest, null, 2)}\n`);
   fs.writeFileSync(path.join(outDir, "data/manifest.json"), `${JSON.stringify(manifest, null, 2)}\n`);
+  writeDatasetMetadataFiles(rows, families, manifest);
+}
+
+function writeJsonPair(rel, payload) {
+  const content = `${JSON.stringify(payload, null, 2)}\n`;
+  fs.writeFileSync(path.join(root, rel), content);
+  fs.writeFileSync(path.join(outDir, "data", rel), content);
+}
+
+function writeDatasetMetadataFiles(rows, families, manifest) {
+  const org = {
+    name: "Packrift",
+    url: "https://packrift.com/",
+  };
+  const datasetTitle = "Packrift Packaging Optimization Benchmark Corpus";
+  const description = "A Packrift-owned public benchmark corpus generated from 1,000 exact-spec packaging product records, with SKU-level dimensional-weight, fit, cost, routing, and warehouse planning references.";
+  const dataFiles = [
+    {
+      name: "quality-ledger",
+      path: "quality-ledger.csv",
+      title: "Quality ledger",
+      description: "SKU-level ledger with source URLs, quality scores, and missing-field flags.",
+      mediatype: "text/csv",
+      format: "csv",
+    },
+    {
+      name: "manifest",
+      path: "manifest.json",
+      title: "Corpus manifest",
+      description: "Corpus counts, family counts, page-type counts, source paths, and guardrails.",
+      mediatype: "application/json",
+      format: "json",
+    },
+    {
+      name: "seo-quality-audit",
+      path: "seo-quality-audit.json",
+      title: "SEO quality audit",
+      description: "Generated quality audit covering HTML files, sitemaps, canonical URLs, and structured data.",
+      mediatype: "application/json",
+      format: "json",
+    },
+  ];
+
+  writeJsonPair("datapackage.json", {
+    profile: "data-package",
+    name: "packrift-packaging-optimization-benchmark-corpus",
+    title: datasetTitle,
+    description,
+    homepage: `${baseUrl}/`,
+    created: artifactDate,
+    contributors: [{ title: org.name, role: "publisher", path: org.url }],
+    keywords: ["packaging", "ecommerce", "optimization", "dimensional-weight", "warehouse-operations", "benchmark"],
+    licenses: [],
+    resources: dataFiles.map((file) => ({
+      name: file.name,
+      path: `${baseUrl}/data/${file.path}`,
+      title: file.title,
+      description: file.description,
+      mediatype: file.mediatype,
+      format: file.format,
+    })),
+    custom: {
+      sourceRows: rows.length,
+      pageTypes: pageTypes.length,
+      skuPages: rows.length * pageTypes.length,
+      families,
+      licenseNote: "No separate open-data license is declared in this release.",
+    },
+  });
+
+  writeJsonPair("croissant.json", {
+    "@context": {
+      "@language": "en",
+      "@vocab": "https://schema.org/",
+      "citeAs": "cr:citeAs",
+      "cr": "http://mlcommons.org/croissant/",
+      "data": { "@id": "cr:data", "@type": "@json" },
+      "field": "cr:field",
+      "fileProperty": "cr:fileProperty",
+      "fileObject": "cr:FileObject",
+      "fileSet": "cr:FileSet",
+      "recordSet": "cr:RecordSet",
+    },
+    "@type": "Dataset",
+    name: datasetTitle,
+    description,
+    url: `${baseUrl}/`,
+    datePublished: artifactDate,
+    creator: org,
+    publisher: org,
+    keywords: ["packaging", "ecommerce", "optimization", "dimensional weight", "warehouse operations"],
+    license: "No separate open-data license is declared in this release.",
+    citeAs: "Packrift Packaging Optimization Benchmark Corpus, v2026.05.14",
+    distribution: dataFiles.map((file) => ({
+      "@type": "DataDownload",
+      name: file.title,
+      encodingFormat: file.mediatype,
+      contentUrl: `${baseUrl}/data/${file.path}`,
+    })),
+    recordSet: [
+      {
+        "@type": "cr:RecordSet",
+        name: "quality-ledger",
+        description: "One row per source SKU in the benchmark corpus.",
+        field: ["sku", "offer_id", "family", "title", "product_url", "quality_score", "quality_max", "missing_fields"].map((name) => ({
+          "@type": "cr:Field",
+          name,
+          dataType: name.includes("score") || name.includes("max") ? "Integer" : "Text",
+        })),
+      },
+    ],
+  });
+
+  const schemaDataset = {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    name: datasetTitle,
+    description,
+    url: `${baseUrl}/`,
+    datePublished: artifactDate,
+    dateModified: artifactDate,
+    creator: { "@type": "Organization", name: org.name, url: org.url },
+    publisher: { "@type": "Organization", name: org.name, url: org.url },
+    isAccessibleForFree: true,
+    keywords: ["packaging", "ecommerce", "optimization", "dimensional weight", "warehouse operations", "benchmark corpus"],
+    variableMeasured: ["SKU", "product family", "source URL", "quality score", "missing fields", "benchmark page type"],
+    size: `${rows.length} source records, ${rows.length * pageTypes.length} SKU benchmark pages`,
+    includedInDataCatalog: {
+      "@type": "DataCatalog",
+      name: "Packrift Packaging Optimization Benchmark Corpus",
+      url: `${baseUrl}/`,
+    },
+    distribution: dataFiles.map((file) => ({
+      "@type": "DataDownload",
+      name: file.title,
+      description: file.description,
+      encodingFormat: file.mediatype,
+      contentUrl: `${baseUrl}/data/${file.path}`,
+    })),
+    conditionsOfAccess: "Public Packrift-published reference corpus. No separate open-data license is declared in this release.",
+  };
+  writeJsonPair("schema-dataset.jsonld", schemaDataset);
+
+  writeJsonPair("datacite.json", {
+    types: {
+      resourceTypeGeneral: "Dataset",
+      resourceType: "Benchmark corpus",
+    },
+    creators: [{ name: org.name, nameType: "Organizational" }],
+    titles: [{ title: datasetTitle }],
+    publisher: org.name,
+    publicationYear: Number(artifactDate.slice(0, 4)),
+    dates: [{ date: artifactDate, dateType: "Issued" }],
+    descriptions: [{ description, descriptionType: "Abstract" }],
+    subjects: ["packaging", "ecommerce", "optimization", "dimensional weight", "warehouse operations"].map((subject) => ({ subject })),
+    url: `${baseUrl}/`,
+    alternateIdentifiers: [
+      { alternateIdentifier: "https://github.com/Packrift/packaging-optimization-benchmark-corpus/releases/tag/v2026.05.14", alternateIdentifierType: "URL" },
+    ],
+    relatedIdentifiers: [
+      {
+        relatedIdentifier: "https://github.com/Packrift/packaging-optimization-benchmark-corpus",
+        relatedIdentifierType: "URL",
+        relationType: "IsSupplementTo",
+      },
+      {
+        relatedIdentifier: "https://packrift.com/pages/tools",
+        relatedIdentifierType: "URL",
+        relationType: "IsReferencedBy",
+      },
+    ],
+    rightsList: [{ rights: "No separate open-data license is declared in this release." }],
+    sizes: [`${rows.length} source records`, `${rows.length * pageTypes.length} SKU benchmark pages`, `${manifest.sitemapUrls} sitemap URLs`],
+  });
+
+  writeJsonPair("ro-crate-metadata.json", {
+    "@context": "https://w3id.org/ro/crate/1.1/context",
+    "@graph": [
+      {
+        "@id": "./",
+        "@type": "Dataset",
+        name: datasetTitle,
+        description,
+        datePublished: artifactDate,
+        publisher: { "@id": "https://packrift.com/" },
+        hasPart: dataFiles.map((file) => ({ "@id": `data/${file.path}` })),
+        license: "No separate open-data license is declared in this release.",
+      },
+      {
+        "@id": "ro-crate-metadata.json",
+        "@type": "CreativeWork",
+        about: { "@id": "./" },
+      },
+      {
+        "@id": "https://packrift.com/",
+        "@type": "Organization",
+        name: org.name,
+        url: org.url,
+      },
+      ...dataFiles.map((file) => ({
+        "@id": `data/${file.path}`,
+        "@type": "File",
+        name: file.title,
+        description: file.description,
+        encodingFormat: file.mediatype,
+        contentUrl: `${baseUrl}/data/${file.path}`,
+      })),
+    ],
+  });
+
+  writeJsonPair("kaggle-dataset-metadata-draft.json", {
+    title: datasetTitle,
+    id: "packrift/packrift-packaging-optimization-benchmark-corpus",
+    subtitle: "SKU-level packaging optimization benchmark corpus for ecommerce fulfillment analysis",
+    description: `${description}\n\nPublication note: this is a draft metadata file. Kaggle publication still requires a Packrift account, a license decision, and platform authentication.`,
+    licenses: [{ name: "other" }],
+    keywords: ["packaging", "ecommerce", "optimization", "dimensional-weight", "warehouse-operations"],
+    collaborators: [],
+    data: dataFiles.map((file) => ({ path: file.path, description: file.description })),
+  });
 }
 
 function sitemapSlug(value) {

@@ -1,0 +1,77 @@
+{
+  "types": {
+    "resourceTypeGeneral": "Dataset",
+    "resourceType": "Benchmark corpus"
+  },
+  "creators": [
+    {
+      "name": "Packrift",
+      "nameType": "Organizational"
+    }
+  ],
+  "titles": [
+    {
+      "title": "Packrift Packaging Optimization Benchmark Corpus"
+    }
+  ],
+  "publisher": "Packrift",
+  "publicationYear": 2026,
+  "dates": [
+    {
+      "date": "2026-05-10",
+      "dateType": "Issued"
+    }
+  ],
+  "descriptions": [
+    {
+      "description": "A Packrift-owned public benchmark corpus generated from 1,000 exact-spec packaging product records, with SKU-level dimensional-weight, fit, cost, routing, and warehouse planning references.",
+      "descriptionType": "Abstract"
+    }
+  ],
+  "subjects": [
+    {
+      "subject": "packaging"
+    },
+    {
+      "subject": "ecommerce"
+    },
+    {
+      "subject": "optimization"
+    },
+    {
+      "subject": "dimensional weight"
+    },
+    {
+      "subject": "warehouse operations"
+    }
+  ],
+  "url": "https://packrift.github.io/packaging-optimization-benchmark-corpus/",
+  "alternateIdentifiers": [
+    {
+      "alternateIdentifier": "https://github.com/Packrift/packaging-optimization-benchmark-corpus/releases/tag/v2026.05.14",
+      "alternateIdentifierType": "URL"
+    }
+  ],
+  "relatedIdentifiers": [
+    {
+      "relatedIdentifier": "https://github.com/Packrift/packaging-optimization-benchmark-corpus",
+      "relatedIdentifierType": "URL",
+      "relationType": "IsSupplementTo"
+    },
+    {
+      "relatedIdentifier": "https://packrift.com/pages/tools",
+      "relatedIdentifierType": "URL",
+      "relationType": "IsReferencedBy"
+    }
+  ],
+  "rightsList": [
+    {
+      "rights": "No separate open-data license is declared in this release."
+    }
+  ],
+  "sizes": [
+    "1000 source records",
+    "24000 SKU benchmark pages",
+    "24036 sitemap URLs"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "title": "Packrift Packaging Optimization Benchmark Corpus",
+  "id": "packrift/packrift-packaging-optimization-benchmark-corpus",
+  "subtitle": "SKU-level packaging optimization benchmark corpus for ecommerce fulfillment analysis",
+  "description": "A Packrift-owned public benchmark corpus generated from 1,000 exact-spec packaging product records, with SKU-level dimensional-weight, fit, cost, routing, and warehouse planning references.\n\nPublication note: this is a draft metadata file. Kaggle publication still requires a Packrift account, a license decision, and platform authentication.",
+  "licenses": [
+    {
+      "name": "other"
+    }
+  ],
+  "keywords": [
+    "packaging",
+    "ecommerce",
+    "optimization",
+    "dimensional-weight",
+    "warehouse-operations"
+  ],
+  "collaborators": [],
+  "data": [
+    {
+      "path": "quality-ledger.csv",
+      "description": "SKU-level ledger with source URLs, quality scores, and missing-field flags."
+    },
+    {
+      "path": "manifest.json",
+      "description": "Corpus counts, family counts, page-type counts, source paths, and guardrails."
+    },
+    {
+      "path": "seo-quality-audit.json",
+      "description": "Generated quality audit covering HTML files, sitemaps, canonical URLs, and structured data."
+    }
+  ]
+}

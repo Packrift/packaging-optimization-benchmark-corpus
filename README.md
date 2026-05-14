@@ -39,17 +39,19 @@ BASE_URL=https://packrift.github.io/your-repo-name node generate-optimization-be
 - Source records: 1,000 exact-spec Packrift feed rows
 - Page types per SKU: 24
 - SKU benchmark pages: 24,000
-- Supporting index/hub/methodology pages: home, SKU index, page-type index, pSEO workflow, quality policy, 6 family hubs, and 24 page-type hubs
-- Total sitemap URLs after local generation: 24,035
-- HTML files after local generation: 24,036 including `404.html`
+- Supporting index/hub/methodology pages: home, SKU index, page-type index, pSEO workflow, quality policy, dataset metadata, 6 family hubs, and 24 page-type hubs
+- Total sitemap URLs after local generation: 24,036
+- HTML files after local generation: 24,037 including `404.html`
 - GitHub Pages output folder: `docs/`
-- Data evidence files: `quality-ledger.csv`, `manifest.json`, and `seo-quality-audit.json`
+- Data evidence files: `quality-ledger.csv`, `manifest.json`, `seo-quality-audit.json`, `datapackage.json`, `croissant.json`, `schema-dataset.jsonld`, `datacite.json`, `ro-crate-metadata.json`, and `kaggle-dataset-metadata-draft.json`
 
 ## Dataset Files
 
 - `quality-ledger.csv` - SKU-level source ledger with offer IDs, families, source Packrift product URLs, quality scores, and missing-field flags.
 - `manifest.json` - generation manifest with source-row counts, family counts, page-type counts, sitemap counts, and quality guardrails.
 - `seo-quality-audit.json` - static audit report covering title/description duplication, canonical/sitemap agreement, structured data, breadcrumbs, and Packrift product-link coverage.
+- `datapackage.json`, `croissant.json`, `schema-dataset.jsonld`, `datacite.json`, `ro-crate-metadata.json`, and `kaggle-dataset-metadata-draft.json` - machine-readable dataset metadata for search/discovery and later archive-platform submission.
+- `docs/dataset-metadata.html` - public metadata index page linking the machine-readable files.
 - `docs/` - generated HTML corpus and sitemap files served by GitHub Pages.
 
 ## Page Types

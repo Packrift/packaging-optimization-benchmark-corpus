@@ -17,6 +17,13 @@ The Packrift Packaging Optimization Benchmark Corpus is a public, Packrift-owned
 - `quality-ledger.csv`: SKU-level ledger with SKU, offer ID, product family, title, Packrift product URL, quality score, and missing-field flags.
 - `manifest.json`: corpus counts, family counts, page-type counts, source paths, and guardrails.
 - `seo-quality-audit.json`: static quality audit for generated HTML and sitemap coverage.
+- `datapackage.json`: Frictionless Data Package metadata for the public corpus files.
+- `croissant.json`: MLCommons Croissant metadata for machine-learning dataset discovery.
+- `schema-dataset.jsonld`: standalone schema.org `Dataset` JSON-LD record.
+- `datacite.json`: DataCite-style citation metadata for DOI/archive preparation.
+- `ro-crate-metadata.json`: Research Object Crate metadata tying the corpus files to the Packrift publisher record.
+- `kaggle-dataset-metadata-draft.json`: Kaggle metadata draft; publication still requires a license decision and account auth.
+- `docs/dataset-metadata.html`: public metadata index page served by GitHub Pages.
 - `docs/`: generated static HTML corpus, sitemaps, robots.txt, methodology pages, and page-type hubs.
 
 ## Intended Uses

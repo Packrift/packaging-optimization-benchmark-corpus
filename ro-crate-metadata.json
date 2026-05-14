@@ -1,0 +1,64 @@
+{
+  "@context": "https://w3id.org/ro/crate/1.1/context",
+  "@graph": [
+    {
+      "@id": "./",
+      "@type": "Dataset",
+      "name": "Packrift Packaging Optimization Benchmark Corpus",
+      "description": "A Packrift-owned public benchmark corpus generated from 1,000 exact-spec packaging product records, with SKU-level dimensional-weight, fit, cost, routing, and warehouse planning references.",
+      "datePublished": "2026-05-10",
+      "publisher": {
+        "@id": "https://packrift.com/"
+      },
+      "hasPart": [
+        {
+          "@id": "data/quality-ledger.csv"
+        },
+        {
+          "@id": "data/manifest.json"
+        },
+        {
+          "@id": "data/seo-quality-audit.json"
+        }
+      ],
+      "license": "No separate open-data license is declared in this release."
+    },
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "about": {
+        "@id": "./"
+      }
+    },
+    {
+      "@id": "https://packrift.com/",
+      "@type": "Organization",
+      "name": "Packrift",
+      "url": "https://packrift.com/"
+    },
+    {
+      "@id": "data/quality-ledger.csv",
+      "@type": "File",
+      "name": "Quality ledger",
+      "description": "SKU-level ledger with source URLs, quality scores, and missing-field flags.",
+      "encodingFormat": "text/csv",
+      "contentUrl": "https://packrift.github.io/packaging-optimization-benchmark-corpus/data/quality-ledger.csv"
+    },
+    {
+      "@id": "data/manifest.json",
+      "@type": "File",
+      "name": "Corpus manifest",
+      "description": "Corpus counts, family counts, page-type counts, source paths, and guardrails.",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://packrift.github.io/packaging-optimization-benchmark-corpus/data/manifest.json"
+    },
+    {
+      "@id": "data/seo-quality-audit.json",
+      "@type": "File",
+      "name": "SEO quality audit",
+      "description": "Generated quality audit covering HTML files, sitemaps, canonical URLs, and structured data.",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://packrift.github.io/packaging-optimization-benchmark-corpus/data/seo-quality-audit.json"
+    }
+  ]
+}

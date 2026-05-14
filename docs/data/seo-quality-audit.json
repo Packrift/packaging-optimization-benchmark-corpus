@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-05-14T03:29:11.561Z",
+  "generatedAt": "2026-05-14T04:09:31.926Z",
   "baseUrl": "https://packrift.github.io/packaging-optimization-benchmark-corpus",
-  "htmlFiles": 24036,
-  "indexableHtmlFiles": 24035,
-  "sitemapLocs": 24035,
+  "htmlFiles": 24037,
+  "indexableHtmlFiles": 24036,
+  "sitemapLocs": 24036,
   "sitemapFiles": [
     "sitemaps/ai-retrieval-card.xml",
     "sitemaps/bulk-quote-prep.xml",

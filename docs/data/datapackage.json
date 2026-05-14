@@ -1,0 +1,64 @@
+{
+  "profile": "data-package",
+  "name": "packrift-packaging-optimization-benchmark-corpus",
+  "title": "Packrift Packaging Optimization Benchmark Corpus",
+  "description": "A Packrift-owned public benchmark corpus generated from 1,000 exact-spec packaging product records, with SKU-level dimensional-weight, fit, cost, routing, and warehouse planning references.",
+  "homepage": "https://packrift.github.io/packaging-optimization-benchmark-corpus/",
+  "created": "2026-05-10",
+  "contributors": [
+    {
+      "title": "Packrift",
+      "role": "publisher",
+      "path": "https://packrift.com/"
+    }
+  ],
+  "keywords": [
+    "packaging",
+    "ecommerce",
+    "optimization",
+    "dimensional-weight",
+    "warehouse-operations",
+    "benchmark"
+  ],
+  "licenses": [],
+  "resources": [
+    {
+      "name": "quality-ledger",
+      "path": "https://packrift.github.io/packaging-optimization-benchmark-corpus/data/quality-ledger.csv",
+      "title": "Quality ledger",
+      "description": "SKU-level ledger with source URLs, quality scores, and missing-field flags.",
+      "mediatype": "text/csv",
+      "format": "csv"
+    },
+    {
+      "name": "manifest",
+      "path": "https://packrift.github.io/packaging-optimization-benchmark-corpus/data/manifest.json",
+      "title": "Corpus manifest",
+      "description": "Corpus counts, family counts, page-type counts, source paths, and guardrails.",
+      "mediatype": "application/json",
+      "format": "json"
+    },
+    {
+      "name": "seo-quality-audit",
+      "path": "https://packrift.github.io/packaging-optimization-benchmark-corpus/data/seo-quality-audit.json",
+      "title": "SEO quality audit",
+      "description": "Generated quality audit covering HTML files, sitemaps, canonical URLs, and structured data.",
+      "mediatype": "application/json",
+      "format": "json"
+    }
+  ],
+  "custom": {
+    "sourceRows": 1000,
+    "pageTypes": 24,
+    "skuPages": 24000,
+    "families": {
+      "mailers": 207,
+      "boxes": 260,
+      "labels": 468,
+      "tape": 7,
+      "poly_bags": 54,
+      "strapping": 4
+    },
+    "licenseNote": "No separate open-data license is declared in this release."
+  }
+}
