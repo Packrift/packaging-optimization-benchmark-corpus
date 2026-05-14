@@ -1,0 +1,5 @@
+order_id,item_length_in,item_width_in,item_height_in,item_count
+demo-small,7.5,4.5,3.5,1
+demo-flat,15.0,7.0,2.5,2
+demo-long,21.0,8.5,5.0,1
+demo-bulk,18.0,12.0,5.5,4

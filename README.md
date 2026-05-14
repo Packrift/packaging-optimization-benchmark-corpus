@@ -53,10 +53,15 @@ BASE_URL=https://packrift.github.io/your-repo-name node generate-optimization-be
 - `datapackage.json`, `croissant.json`, `schema-dataset.jsonld`, `datacite.json`, `ro-crate-metadata.json`, and `kaggle-dataset-metadata-draft.json` - machine-readable dataset metadata for search/discovery and later archive-platform submission.
 - `docs/dataset-metadata.html` - public metadata index page linking the machine-readable files.
 - `docs/` - generated HTML corpus and sitemap files served by GitHub Pages.
+- `examples/ortools-carton-selection/` and `docs/ortools-carton-selection-example.html` - small Google OR-Tools CP-SAT carton-selection example using static Packrift dimension samples.
 
 ## Page Types
 
 The 24 page types are operationally distinct: DIM-weight benchmark, cube utilization, length-plus-girth, carton-fit boundary, void-fill screen, parcel/freight router, pallet storage prompt, warehouse bin slotting, pick-path label card, receiving inspection, source-spec audit, substitute approval, damage risk, material compatibility, pack-count normalization, unit economics, reorder trigger, bulk quote prep, marketplace prep, returns repack, AI retrieval, buyer comparison, QA exception, and implementation handoff.
+
+## OR-Tools Example
+
+The repository includes a small Google OR-Tools CP-SAT example at `examples/ortools-carton-selection/`. It selects the smallest feasible carton from a static Packrift sample set using orientation and relaxed volume screens. The public explainer page is `docs/ortools-carton-selection-example.html`.
 
 ## Quality Safeguards
 
