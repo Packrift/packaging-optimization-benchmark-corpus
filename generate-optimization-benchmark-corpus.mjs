@@ -8,7 +8,8 @@ const graphPath = process.env.PRODUCT_GRAPH_PATH || "/Users/farhan/Downloads/pac
 const outDir = path.join(root, "docs");
 const baseUrl = (process.env.BASE_URL || "https://packrift.github.io/packaging-optimization-benchmark-corpus").replace(/\/+$/, "");
 const rowLimit = Number(process.env.PAGE_ROW_LIMIT || 1000);
-const artifactDate = "2026-05-10";
+const artifactDate = "2026-05-15";
+const artifactVersion = artifactDate.replaceAll("-", ".");
 const indexNowKey = "5050e763abb8dafdc736a5971e107171";
 const googleGuidance = {
   helpfulContent: "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
@@ -552,7 +553,7 @@ function pageShell({ title, description, canonical, body, schema, breadcrumbs = 
   ${schemaPayload ? `<script type="application/ld+json">${JSON.stringify(schemaPayload)}</script>` : ""}
 </head>
 <body>
-  <header><div class="wrap top"><a class="brand" href="${baseUrl}/">Packrift optimization benchmark corpus</a><nav><a href="${baseUrl}/sku-index.html">SKU index</a><a href="${baseUrl}/page-types.html">Page types</a><a href="${baseUrl}/programmatic-seo-workflow.html">pSEO workflow</a><a href="${baseUrl}/quality-policy.html">Quality policy</a><a href="${baseUrl}/sitemap.xml">Sitemap</a><a href="https://packrift.com/pages/tools">Packaging tools</a><a href="https://packrift.com/">Packrift.com</a></nav></div></header>
+  <header><div class="wrap top"><a class="brand" href="${baseUrl}/">Packrift optimization benchmark corpus</a><nav><a href="${baseUrl}/sku-index.html">SKU index</a><a href="${baseUrl}/page-types.html">Page types</a><a href="${baseUrl}/programmatic-seo-workflow.html">pSEO workflow</a><a href="${baseUrl}/cartonization-benchmark-note.html">Benchmark note</a><a href="${baseUrl}/quality-policy.html">Quality policy</a><a href="${baseUrl}/sitemap.xml">Sitemap</a><a href="https://packrift.com/pages/tools">Packaging tools</a><a href="https://packrift.com/">Packrift.com</a></nav></div></header>
   <main class="wrap">${breadcrumbHtml(breadcrumbs)}${body}</main>
   <footer><div class="wrap">Packrift-owned benchmark/reference content. Static source snapshots are not live price, inventory, freight, or substitute approvals; use the <a href="https://packrift.com/pages/tools">Packrift packaging tools hub</a> and verify on Packrift.com before buying or publishing downstream claims.</div></footer>
 </body>
@@ -762,7 +763,7 @@ function buildHome(rows, urls, families) {
       <section>
         <h1>Packrift optimization benchmark corpus</h1>
         <p>A GitHub Pages-ready corpus concept that turns 1,000 exact-spec Packrift feed records into ${totalSkuPages.toLocaleString("en-US")} SKU-specific benchmark pages across ${pageTypes.length} operational page types. It is built for buyers, warehouse teams, AI retrieval, and packaging ops workflows, not thin keyword swaps.</p>
-        <div class="links"><a class="button" href="${baseUrl}/page-types.html">Browse page types</a><a class="button secondary" href="${baseUrl}/sku-index.html">Browse SKUs</a><a class="button secondary" href="${baseUrl}/programmatic-seo-workflow.html">Review pSEO workflow</a></div>
+        <div class="links"><a class="button" href="${baseUrl}/page-types.html">Browse page types</a><a class="button secondary" href="${baseUrl}/sku-index.html">Browse SKUs</a><a class="button secondary" href="${baseUrl}/cartonization-benchmark-note.html">Read benchmark note</a></div>
       </section>
       <aside class="panel meta">
         <div><strong>Source records</strong><span>${rows.length.toLocaleString("en-US")}</span></div>
@@ -772,7 +773,7 @@ function buildHome(rows, urls, families) {
       </aside>
     </div>
     <section class="panel"><h2>Corpus concept</h2><p>Each SKU gets one page per operational benchmark: DIM weight, cube, fit, routing, material compatibility, reorder, bulk quote prep, AI retrieval, QA exceptions, and implementation handoff. The pages expose source facts, calculations, missing-field caveats, and Packrift product links.</p></section>
-    <section class="panel"><h2>Data access</h2><p>The public source ledger, manifest, metadata, and sitemap make the corpus auditable instead of opaque.</p><div class="links"><a class="button secondary" href="${baseUrl}/data/quality-ledger.csv">Quality ledger CSV</a><a class="button secondary" href="${baseUrl}/data/manifest.json">Manifest JSON</a><a class="button secondary" href="${baseUrl}/dataset-metadata.html">Dataset metadata</a><a class="button secondary" href="${baseUrl}/sitemap.xml">Sitemap index</a></div></section>
+    <section class="panel"><h2>Data access</h2><p>The public source ledger, manifest, metadata, benchmark note, and sitemap make the corpus auditable instead of opaque.</p><div class="links"><a class="button secondary" href="${baseUrl}/data/quality-ledger.csv">Quality ledger CSV</a><a class="button secondary" href="${baseUrl}/data/manifest.json">Manifest JSON</a><a class="button secondary" href="${baseUrl}/dataset-metadata.html">Dataset metadata</a><a class="button secondary" href="${baseUrl}/sitemap.xml">Sitemap index</a></div></section>
     <div class="grid">${pageTypes.slice(0, 9).map((type) => `<article class="card"><h2>${esc(type.label)}</h2><p>${esc(type.intent)}</p><p><a href="${baseUrl}/${type.id}/">Open hub</a></p></article>`).join("\n")}</div>
     <section class="panel"><h2>Family mix</h2>${table(Object.entries(families).map(([family, count]) => [familyName(family), `${count.toLocaleString("en-US")} source records`]))}</section>
   `;
@@ -843,6 +844,145 @@ function buildIndexes(rows, urls, families) {
     breadcrumbs: [
       { name: "Benchmark corpus", url: `${baseUrl}/` },
       { name: "pSEO workflow", url: `${baseUrl}/programmatic-seo-workflow.html` },
+    ],
+  }), urls);
+
+  const benchmarkNoteDescription = "Technical note defining the Packrift packaging optimization corpus as a source-backed cartonization, DIM, and bin-packing benchmark.";
+  writeFile("cartonization-benchmark-note.html", pageShell({
+    title: "Packrift cartonization benchmark technical note",
+    description: benchmarkNoteDescription,
+    canonical: `${baseUrl}/cartonization-benchmark-note.html`,
+    body: `<h1>Cartonization benchmark technical note</h1>
+      <p class="notice">This note explains the benchmark shape behind the Packrift Packaging Optimization Benchmark Corpus. It is written for operations research, ecommerce engineering, warehouse systems, and AI-agent evaluation contexts.</p>
+      <section class="panel"><h2>Benchmark objective</h2><p>The corpus turns source-backed Packrift packaging SKUs into static benchmark records for carton selection, dimensional-weight screening, cube utilization, source-spec auditing, and implementation handoff. It is not a live commerce feed, a freight promise, or an endorsement from a third-party publisher.</p></section>
+      <section class="panel"><h2>Source model</h2>${table([
+        ["Entity", "Meaning"],
+        ["SKU", "Packrift packaging item identifier used to join source facts and product URLs."],
+        ["Family", "Operational group such as corrugated boxes, mailers, labels, poly bags, tape, or strapping."],
+        ["Dimensions", "Length, width, and height parsed from Packrift source fields when present."],
+        ["Weight", "Static source snapshot used for screening calculations only."],
+        ["Pack count", "Case, bundle, roll, or unit quantity used for normalization tasks."],
+        ["Quality score", "Generator-level source completeness gate exposed in the public ledger."],
+        ["Product URL", "Canonical Packrift product page where live price, inventory, and checkout state must be verified."],
+      ])}</section>
+      <section class="panel"><h2>Canonical tasks</h2>${list([
+        "Carton feasibility: identify whether listed dimensions can satisfy a fit or handling screen before human approval.",
+        "Dimensional-weight exposure: compute DIM-weight screens from listed dimensions without claiming carrier-specific billing.",
+        "Cube and slotting comparison: compare volume, face area, family, and pack-count signals across same-family SKUs.",
+        "Source-spec audit: expose missing fields, weak dimensions, missing weight, or weak product graph matches before a page is trusted.",
+        "AI retrieval evaluation: test whether an agent can retrieve the correct SKU, source caveats, and Packrift product URL for a packaging scenario.",
+        "Implementation handoff: produce a buyer, warehouse, or agent checklist that routes live verification back to Packrift.com.",
+      ])}</section>
+      <section class="panel"><h2>Evaluation metrics</h2>${table([
+        ["Metric", "Use"],
+        ["Feasibility precision", "Share of selected candidates that pass the visible fit and source-quality screens."],
+        ["Source-caveat recall", "Whether missing dimensions, missing weight, or static-price caveats are carried into the final answer."],
+        ["Canonical-link accuracy", "Whether the evaluated system returns the correct Packrift product URL, not a stale or invented destination."],
+        ["Volume waste proxy", "Difference between candidate inner volume and item volume when dimensions are available."],
+        ["DIM-weight screen", "Static benchmark comparison using documented divisor assumptions; live carrier billing must be verified separately."],
+        ["Human-handoff completeness", "Whether the output includes SKU, family, dimensions, pack count, source quality, and next verification step."],
+      ])}</section>
+      <section class="panel"><h2>Baseline example</h2><p>The repository includes a small OR-Tools CP-SAT carton-selection example that selects a feasible static carton from sample Packrift dimensions using orientation and volume screens. It is intentionally conservative and should be treated as a runnable baseline, not a production packing solver.</p><div class="links"><a class="button secondary" href="${baseUrl}/ortools-carton-selection-example.html">Open OR-Tools example</a><a class="button secondary" href="https://github.com/Packrift/packaging-optimization-benchmark-corpus/tree/main/examples/ortools-carton-selection">Open source example</a></div></section>
+      <section class="panel"><h2>Limitations</h2>${list([
+        "No separate open-data license is declared in this release; dataset-platform publication still requires a Packrift license decision.",
+        "Static rows are generated from source snapshots and must not be used as live price, inventory, freight, or checkout facts.",
+        "The corpus includes product-derived ecommerce packaging scenarios, not randomized academic benchmark instances.",
+        "Fit approval, substitute approval, freight routing, damage risk, and purchase decisions require live Packrift verification.",
+        "This page is a Packrift-owned technical resource; count it as owned public crawlable presence, not a third-party backlink or editorial citation.",
+      ])}</section>
+      <section class="panel"><h2>Reproducibility artifacts</h2><div class="links"><a class="button secondary" href="${baseUrl}/data/quality-ledger.csv">Quality ledger CSV</a><a class="button secondary" href="${baseUrl}/data/manifest.json">Manifest JSON</a><a class="button secondary" href="${baseUrl}/data/datapackage.json">Data Package</a><a class="button secondary" href="${baseUrl}/data/croissant.json">Croissant metadata</a><a class="button secondary" href="${baseUrl}/data/seo-quality-audit.json">SEO audit JSON</a></div></section>`,
+    schema: graphSchema([
+      {
+        "@type": "TechArticle",
+        headline: "Packrift cartonization benchmark technical note",
+        description: benchmarkNoteDescription,
+        datePublished: artifactDate,
+        dateModified: artifactDate,
+        author: { "@type": "Organization", name: "Packrift", url: "https://packrift.com/" },
+        publisher: { "@type": "Organization", name: "Packrift", url: "https://packrift.com/" },
+        mainEntityOfPage: `${baseUrl}/cartonization-benchmark-note.html`,
+        about: [
+          { "@type": "Thing", name: "cartonization" },
+          { "@type": "Thing", name: "bin packing" },
+          { "@type": "Thing", name: "dimensional weight" },
+          { "@type": "Dataset", name: "Packrift Packaging Optimization Benchmark Corpus", url: `${baseUrl}/dataset-metadata.html` },
+        ],
+      },
+      breadcrumbSchema([
+        { name: "Benchmark corpus", url: `${baseUrl}/` },
+        { name: "Benchmark note", url: `${baseUrl}/cartonization-benchmark-note.html` },
+      ]),
+    ]),
+    breadcrumbs: [
+      { name: "Benchmark corpus", url: `${baseUrl}/` },
+      { name: "Benchmark note", url: `${baseUrl}/cartonization-benchmark-note.html` },
+    ],
+  }), urls);
+
+  writeFile("ortools-carton-selection-example.html", pageShell({
+    title: "OR-Tools Carton Selection Example | Packrift Benchmark Corpus",
+    description: "A Packrift OR-Tools CP-SAT example for selecting the smallest feasible carton from static packaging dimension data.",
+    canonical: `${baseUrl}/ortools-carton-selection-example.html`,
+    body: `<section class="hero">
+      <p class="eyebrow">Google OR-Tools CP-SAT sample</p>
+      <h1>OR-Tools carton selection example</h1>
+      <p>Use a small static Packrift carton subset to demonstrate how an optimization model can screen candidate boxes before a buyer verifies live price, inventory, freight, checkout terms, and final fit on Packrift.com.</p>
+      <div class="links"><a class="button" href="https://github.com/Packrift/packaging-optimization-benchmark-corpus/tree/main/examples/ortools-carton-selection">Open the example code</a><a class="button secondary" href="https://developers.google.com/optimization">OR-Tools docs</a></div>
+    </section>
+    <section class="panel"><h2>What the model does</h2>${list([
+      "Creates one boolean decision variable per candidate carton.",
+      "Fixes infeasible candidates to zero when the item dimensions cannot fit in any orientation.",
+      "Applies a relaxed volume screen for repeated item counts.",
+      "Minimizes selected carton volume among feasible candidates.",
+    ])}</section>
+    <section class="panel"><h2>What it does not do</h2>${list([
+      "It is not a full 3D packing proof.",
+      "It does not use live Packrift prices, inventory, freight rates, or checkout state.",
+      "It does not approve substitutions, material compatibility, or carrier-specific handling rules.",
+    ])}</section>
+    <section class="panel"><h2>Run locally</h2><pre><code>cd examples/ortools-carton-selection
+python3 -m venv .venv
+. .venv/bin/activate
+pip install -r requirements.txt
+python carton_selection.py</code></pre></section>
+    <section class="panel"><h2>Source files</h2>${list([
+      `<a href="https://github.com/Packrift/packaging-optimization-benchmark-corpus/blob/main/examples/ortools-carton-selection/carton_selection.py">carton_selection.py</a>`,
+      `<a href="https://github.com/Packrift/packaging-optimization-benchmark-corpus/blob/main/examples/ortools-carton-selection/sample_cartons.csv">sample_cartons.csv</a>`,
+      `<a href="https://github.com/Packrift/packaging-optimization-benchmark-corpus/blob/main/examples/ortools-carton-selection/sample_orders.csv">sample_orders.csv</a>`,
+    ])}</section>`,
+    schema: graphSchema([
+      {
+        "@type": "TechArticle",
+        headline: "OR-Tools Carton Selection Example",
+        description: "A Packrift OR-Tools CP-SAT example for selecting the smallest feasible carton from static packaging dimension data.",
+        datePublished: artifactDate,
+        dateModified: artifactDate,
+        author: { "@type": "Organization", name: "Packrift", url: "https://packrift.com/" },
+        publisher: { "@type": "Organization", name: "Packrift", url: "https://packrift.com/" },
+        mainEntityOfPage: `${baseUrl}/ortools-carton-selection-example.html`,
+        about: [
+          {
+            "@type": "SoftwareSourceCode",
+            name: "OR-Tools carton selection example",
+            programmingLanguage: "Python",
+            runtimePlatform: "Google OR-Tools CP-SAT",
+            codeRepository: "https://github.com/Packrift/packaging-optimization-benchmark-corpus/tree/main/examples/ortools-carton-selection",
+          },
+          {
+            "@type": "Dataset",
+            name: "Packrift Packaging Optimization Benchmark Corpus",
+            url: `${baseUrl}/dataset-metadata.html`,
+          },
+        ],
+      },
+      breadcrumbSchema([
+        { name: "Benchmark corpus", url: `${baseUrl}/` },
+        { name: "OR-Tools carton selection example", url: `${baseUrl}/ortools-carton-selection-example.html` },
+      ]),
+    ]),
+    breadcrumbs: [
+      { name: "Benchmark corpus", url: `${baseUrl}/` },
+      { name: "OR-Tools carton selection example", url: `${baseUrl}/ortools-carton-selection-example.html` },
     ],
   }), urls);
 
@@ -1030,7 +1170,7 @@ function writeDatasetMetadataFiles(rows, families, manifest) {
     publisher: org,
     keywords: ["packaging", "ecommerce", "optimization", "dimensional weight", "warehouse operations"],
     license: "No separate open-data license is declared in this release.",
-    citeAs: "Packrift Packaging Optimization Benchmark Corpus, v2026.05.14",
+    citeAs: `Packrift Packaging Optimization Benchmark Corpus, v${artifactVersion}`,
     distribution: dataFiles.map((file) => ({
       "@type": "DataDownload",
       name: file.title,
@@ -1095,7 +1235,7 @@ function writeDatasetMetadataFiles(rows, families, manifest) {
     subjects: ["packaging", "ecommerce", "optimization", "dimensional weight", "warehouse operations"].map((subject) => ({ subject })),
     url: `${baseUrl}/`,
     alternateIdentifiers: [
-      { alternateIdentifier: "https://github.com/Packrift/packaging-optimization-benchmark-corpus/releases/tag/v2026.05.14", alternateIdentifierType: "URL" },
+      { alternateIdentifier: `https://github.com/Packrift/packaging-optimization-benchmark-corpus/releases/tag/v${artifactVersion}`, alternateIdentifierType: "URL" },
     ],
     relatedIdentifiers: [
       {

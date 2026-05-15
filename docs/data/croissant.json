@@ -18,7 +18,7 @@
   "name": "Packrift Packaging Optimization Benchmark Corpus",
   "description": "A Packrift-owned public benchmark corpus generated from 1,000 exact-spec packaging product records, with SKU-level dimensional-weight, fit, cost, routing, and warehouse planning references.",
   "url": "https://packrift.github.io/packaging-optimization-benchmark-corpus/",
-  "datePublished": "2026-05-10",
+  "datePublished": "2026-05-15",
   "creator": {
     "name": "Packrift",
     "url": "https://packrift.com/"
@@ -35,7 +35,7 @@
     "warehouse operations"
   ],
   "license": "No separate open-data license is declared in this release.",
-  "citeAs": "Packrift Packaging Optimization Benchmark Corpus, v2026.05.14",
+  "citeAs": "Packrift Packaging Optimization Benchmark Corpus, v2026.05.15",
   "distribution": [
     {
       "@type": "DataDownload",

@@ -6,7 +6,7 @@
       "@type": "Dataset",
       "name": "Packrift Packaging Optimization Benchmark Corpus",
       "description": "A Packrift-owned public benchmark corpus generated from 1,000 exact-spec packaging product records, with SKU-level dimensional-weight, fit, cost, routing, and warehouse planning references.",
-      "datePublished": "2026-05-10",
+      "datePublished": "2026-05-15",
       "publisher": {
         "@id": "https://packrift.com/"
       },

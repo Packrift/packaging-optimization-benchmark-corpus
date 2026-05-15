@@ -18,7 +18,7 @@
   "publicationYear": 2026,
   "dates": [
     {
-      "date": "2026-05-10",
+      "date": "2026-05-15",
       "dateType": "Issued"
     }
   ],
@@ -48,7 +48,7 @@
   "url": "https://packrift.github.io/packaging-optimization-benchmark-corpus/",
   "alternateIdentifiers": [
     {
-      "alternateIdentifier": "https://github.com/Packrift/packaging-optimization-benchmark-corpus/releases/tag/v2026.05.14",
+      "alternateIdentifier": "https://github.com/Packrift/packaging-optimization-benchmark-corpus/releases/tag/v2026.05.15",
       "alternateIdentifierType": "URL"
     }
   ],
@@ -72,6 +72,6 @@
   "sizes": [
     "1000 source records",
     "24000 SKU benchmark pages",
-    "24036 sitemap URLs"
+    "24038 sitemap URLs"
   ]
 }

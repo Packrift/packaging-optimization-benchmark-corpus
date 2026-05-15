@@ -1,13 +1,13 @@
 {
-  "artifactDate": "2026-05-10",
+  "artifactDate": "2026-05-15",
   "baseUrl": "https://packrift.github.io/packaging-optimization-benchmark-corpus",
   "sourceFeed": "/Users/farhan/Downloads/packrift-ai-commerce-execution-2026-05-04/ai-catalog-control/merchant-top1000/merchant-center-top1000-exact-spec-feed-2026-05-05.jsonl",
   "productGraph": "/Users/farhan/Downloads/packrift-ai-commerce-factory/control/product_spec_graph_current.csv",
   "sourceRows": 1000,
   "pageTypes": 24,
   "skuPages": 24000,
-  "sitemapUrls": 24036,
-  "htmlFiles": 24037,
+  "sitemapUrls": 24038,
+  "htmlFiles": 24039,
   "families": {
     "mailers": 207,
     "boxes": 260,
