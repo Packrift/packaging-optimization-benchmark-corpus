@@ -24,11 +24,13 @@ The Packrift Packaging Optimization Benchmark Corpus is a public, Packrift-owned
 - `ro-crate-metadata.json`: Research Object Crate metadata tying the corpus files to the Packrift publisher record.
 - `kaggle-dataset-metadata-draft.json`: Kaggle metadata draft; publication still requires a license decision and account auth.
 - `docs/dataset-metadata.html`: public metadata index page served by GitHub Pages.
+- `docs/cartonization-benchmark-note.html`: technical note defining the corpus source model, canonical tasks, evaluation metrics, baseline example, limitations, and reproducibility artifacts for cartonization/bin-packing use cases.
 - `docs/`: generated static HTML corpus, sitemaps, robots.txt, methodology pages, and page-type hubs.
 
 ## Intended Uses
 
 - Packaging optimization benchmark and retrieval tests.
+- Real-world cartonization input-data evaluation where known optimal solutions are not claimed.
 - Ecommerce packaging data-quality and source-spec audits.
 - AI-agent retrieval evaluation for packaging product pages.
 - Warehouse and fulfillment planning examples for carton, mailer, label, tape, poly bag, and strapping SKUs.
