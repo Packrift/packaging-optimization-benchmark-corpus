@@ -1,0 +1,90 @@
+{
+  "units": "inches",
+  "source": "Packrift Packaging Optimization Benchmark Corpus cartonization solver fixture pack",
+  "cartons": [
+    {
+      "name": "Packrift 10x6x6 carton",
+      "sku": "1066",
+      "length": 10,
+      "width": 6,
+      "height": 6,
+      "max_weight": 65,
+      "product_url": "https://packrift.com/products/10x6x6-ect-32-kraft-long-corrugated-boxes-25-bundle"
+    },
+    {
+      "name": "Packrift 16x8x4 carton",
+      "sku": "1684",
+      "length": 16,
+      "width": 8,
+      "height": 4,
+      "max_weight": 65,
+      "product_url": "https://packrift.com/products/16x8x4-ect-32-kraft-corrugated-shipping-boxes-25-bundle"
+    },
+    {
+      "name": "Packrift 20x14x6 carton",
+      "sku": "20146",
+      "length": 20,
+      "width": 14,
+      "height": 6,
+      "max_weight": 65,
+      "product_url": "https://packrift.com/products/20x14x6-ect-32-kraft-corrugated-boxes-shallow-depth-design-bundle-of-25"
+    },
+    {
+      "name": "Packrift 24x10x8 carton",
+      "sku": "24108",
+      "length": 24,
+      "width": 10,
+      "height": 8,
+      "max_weight": 65,
+      "product_url": "https://packrift.com/products/24x10x8-ect-32-kraft-corrugated-long-boxes-easy-pack-design-bundle-of-25"
+    },
+    {
+      "name": "Packrift 40x20x20 carton",
+      "sku": "402020",
+      "length": 40,
+      "width": 20,
+      "height": 20,
+      "max_weight": 65,
+      "product_url": "https://packrift.com/products/40x20x20-ect-32-kraft-corrugated-boxes-bulk-shipping-10-pack"
+    }
+  ],
+  "items": [
+    {
+      "name": "demo-small-item",
+      "length": 7.5,
+      "width": 4.5,
+      "height": 3.5,
+      "weight": 1,
+      "quantity": 1
+    },
+    {
+      "name": "demo-flat-item",
+      "length": 15,
+      "width": 7,
+      "height": 2.5,
+      "weight": 2,
+      "quantity": 2
+    },
+    {
+      "name": "demo-long-item",
+      "length": 21,
+      "width": 8.5,
+      "height": 5,
+      "weight": 3,
+      "quantity": 1
+    },
+    {
+      "name": "demo-bulk-item",
+      "length": 18,
+      "width": 12,
+      "height": 5.5,
+      "weight": 4,
+      "quantity": 4
+    }
+  ],
+  "limitations": [
+    "Small deterministic fixture, not an optimal-solution benchmark.",
+    "Live commerce facts must be verified on Packrift.com.",
+    "Max weight values are neutral smoke-test defaults, not carrier or Packrift approval claims."
+  ]
+}

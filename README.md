@@ -39,9 +39,9 @@ BASE_URL=https://packrift.github.io/your-repo-name node generate-optimization-be
 - Source records: 1,000 exact-spec Packrift feed rows
 - Page types per SKU: 24
 - SKU benchmark pages: 24,000
-- Supporting index/hub/methodology pages: home, SKU index, page-type index, pSEO workflow, cartonization benchmark technical note, quality policy, dataset metadata, 6 family hubs, and 24 page-type hubs
-- Total sitemap URLs after local generation: 24,038
-- HTML files after local generation: 24,039 including `404.html`
+- Supporting index/hub/methodology pages: home, SKU index, page-type index, pSEO workflow, cartonization benchmark technical note, cartonization solver fixtures, quality policy, dataset metadata, 6 family hubs, and 24 page-type hubs
+- Total sitemap URLs after local generation: 24,039
+- HTML files after local generation: 24,040 including `404.html`
 - GitHub Pages output folder: `docs/`
 - Data evidence files: `quality-ledger.csv`, `manifest.json`, `seo-quality-audit.json`, `datapackage.json`, `croissant.json`, `schema-dataset.jsonld`, `datacite.json`, `ro-crate-metadata.json`, and `kaggle-dataset-metadata-draft.json`
 
@@ -53,6 +53,7 @@ BASE_URL=https://packrift.github.io/your-repo-name node generate-optimization-be
 - `datapackage.json`, `croissant.json`, `schema-dataset.jsonld`, `datacite.json`, `ro-crate-metadata.json`, and `kaggle-dataset-metadata-draft.json` - machine-readable dataset metadata for search/discovery and later archive-platform submission.
 - `docs/dataset-metadata.html` - public metadata index page linking the machine-readable files.
 - `docs/cartonization-benchmark-note.html` - technical benchmark note defining source fields, tasks, metrics, baselines, and limitations for cartonization/bin-packing use cases.
+- `docs/cartonization-solver-fixtures.html` and `examples/cartonization-fixtures/` - solver-ready CSV, JSON, and TXT fixture pack for bin-packing parser tests and runnable examples.
 - `docs/` - generated HTML corpus and sitemap files served by GitHub Pages.
 - `examples/ortools-carton-selection/` and `docs/ortools-carton-selection-example.html` - small Google OR-Tools CP-SAT carton-selection example using static Packrift dimension samples.
 

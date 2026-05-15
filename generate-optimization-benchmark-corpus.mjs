@@ -17,6 +17,50 @@ const googleGuidance = {
   sitemaps: "https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap",
   structuredData: "https://developers.google.com/search/docs/appearance/structured-data/sd-policies",
 };
+const fixtureSourceDir = path.join(root, "examples/cartonization-fixtures");
+const fixtureDataDir = "cartonization-fixtures";
+const fixtureFiles = [
+  {
+    name: "fixture-cartons",
+    path: `${fixtureDataDir}/fixture_cartons.csv`,
+    title: "Carton fixture CSV",
+    description: "Five static Packrift carton candidates with SKU, dimensions, and product URLs.",
+    mediatype: "text/csv",
+    format: "csv",
+  },
+  {
+    name: "fixture-orders",
+    path: `${fixtureDataDir}/fixture_orders.csv`,
+    title: "Order fixture CSV",
+    description: "Four demo ecommerce order rows with item dimensions and counts.",
+    mediatype: "text/csv",
+    format: "csv",
+  },
+  {
+    name: "py3dbp-fixture",
+    path: `${fixtureDataDir}/py3dbp_fixture.json`,
+    title: "py3dbp-style fixture JSON",
+    description: "Generic bins/items JSON shaped for Python 3D bin-packing examples.",
+    mediatype: "application/json",
+    format: "json",
+  },
+  {
+    name: "dwave-ecommerce-cartons",
+    path: `${fixtureDataDir}/dwave_sample_data_ecommerce_cartons.txt`,
+    title: "D-Wave 3D bin-packing sample TXT",
+    description: "Small ecommerce-carton instance using the D-Wave 3D bin-packing example input shape.",
+    mediatype: "text/plain",
+    format: "txt",
+  },
+  {
+    name: "fixture-readme",
+    path: `${fixtureDataDir}/README.md`,
+    title: "Fixture pack README",
+    description: "Source notes, limitations, and format guidance for the solver fixture pack.",
+    mediatype: "text/markdown",
+    format: "md",
+  },
+];
 
 const pageTypes = [
   ["dimensional-weight-benchmark", "Dimensional Weight Benchmark", "Screen whether listed dimensions can create parcel DIM-weight exposure before a buyer standardizes a SKU."],
@@ -657,6 +701,7 @@ function metadataFileList() {
     ["schema.org Dataset JSON-LD", "data/schema-dataset.jsonld", "application/ld+json", "Standalone structured-data record for crawlers and archive platforms."],
     ["DataCite JSON", "data/datacite.json", "application/json", "Citation-oriented metadata for DOI/archive preparation."],
     ["RO-Crate", "data/ro-crate-metadata.json", "application/ld+json", "Research Object Crate metadata tying the corpus, files, and Packrift publisher record together."],
+    ["Solver fixture pack", "data/cartonization-fixtures/README.md", "text/markdown", "Solver-ready CSV, JSON, and TXT fixture formats for cartonization and bin-packing examples."],
     ["Kaggle metadata draft", "data/kaggle-dataset-metadata-draft.json", "application/json", "Draft upload metadata; publication still requires a license decision and Kaggle auth."],
   ].map(([label, rel, format, description]) => ({
     label,
@@ -763,7 +808,7 @@ function buildHome(rows, urls, families) {
       <section>
         <h1>Packrift optimization benchmark corpus</h1>
         <p>A GitHub Pages-ready corpus concept that turns 1,000 exact-spec Packrift feed records into ${totalSkuPages.toLocaleString("en-US")} SKU-specific benchmark pages across ${pageTypes.length} operational page types. It is built for buyers, warehouse teams, AI retrieval, and packaging ops workflows, not thin keyword swaps.</p>
-        <div class="links"><a class="button" href="${baseUrl}/page-types.html">Browse page types</a><a class="button secondary" href="${baseUrl}/sku-index.html">Browse SKUs</a><a class="button secondary" href="${baseUrl}/cartonization-benchmark-note.html">Read benchmark note</a></div>
+        <div class="links"><a class="button" href="${baseUrl}/page-types.html">Browse page types</a><a class="button secondary" href="${baseUrl}/sku-index.html">Browse SKUs</a><a class="button secondary" href="${baseUrl}/cartonization-solver-fixtures.html">Use solver fixtures</a></div>
       </section>
       <aside class="panel meta">
         <div><strong>Source records</strong><span>${rows.length.toLocaleString("en-US")}</span></div>
@@ -773,7 +818,7 @@ function buildHome(rows, urls, families) {
       </aside>
     </div>
     <section class="panel"><h2>Corpus concept</h2><p>Each SKU gets one page per operational benchmark: DIM weight, cube, fit, routing, material compatibility, reorder, bulk quote prep, AI retrieval, QA exceptions, and implementation handoff. The pages expose source facts, calculations, missing-field caveats, and Packrift product links.</p></section>
-    <section class="panel"><h2>Data access</h2><p>The public source ledger, manifest, metadata, benchmark note, and sitemap make the corpus auditable instead of opaque.</p><div class="links"><a class="button secondary" href="${baseUrl}/data/quality-ledger.csv">Quality ledger CSV</a><a class="button secondary" href="${baseUrl}/data/manifest.json">Manifest JSON</a><a class="button secondary" href="${baseUrl}/dataset-metadata.html">Dataset metadata</a><a class="button secondary" href="${baseUrl}/sitemap.xml">Sitemap index</a></div></section>
+    <section class="panel"><h2>Data access</h2><p>The public source ledger, manifest, metadata, benchmark note, solver fixtures, and sitemap make the corpus auditable instead of opaque.</p><div class="links"><a class="button secondary" href="${baseUrl}/data/quality-ledger.csv">Quality ledger CSV</a><a class="button secondary" href="${baseUrl}/data/manifest.json">Manifest JSON</a><a class="button secondary" href="${baseUrl}/dataset-metadata.html">Dataset metadata</a><a class="button secondary" href="${baseUrl}/cartonization-solver-fixtures.html">Solver fixtures</a><a class="button secondary" href="${baseUrl}/sitemap.xml">Sitemap index</a></div></section>
     <div class="grid">${pageTypes.slice(0, 9).map((type) => `<article class="card"><h2>${esc(type.label)}</h2><p>${esc(type.intent)}</p><p><a href="${baseUrl}/${type.id}/">Open hub</a></p></article>`).join("\n")}</div>
     <section class="panel"><h2>Family mix</h2>${table(Object.entries(families).map(([family, count]) => [familyName(family), `${count.toLocaleString("en-US")} source records`]))}</section>
   `;
@@ -882,7 +927,7 @@ function buildIndexes(rows, urls, families) {
         ["DIM-weight screen", "Static benchmark comparison using documented divisor assumptions; live carrier billing must be verified separately."],
         ["Human-handoff completeness", "Whether the output includes SKU, family, dimensions, pack count, source quality, and next verification step."],
       ])}</section>
-      <section class="panel"><h2>Baseline example</h2><p>The repository includes a small OR-Tools CP-SAT carton-selection example that selects a feasible static carton from sample Packrift dimensions using orientation and volume screens. It is intentionally conservative and should be treated as a runnable baseline, not a production packing solver.</p><div class="links"><a class="button secondary" href="${baseUrl}/ortools-carton-selection-example.html">Open OR-Tools example</a><a class="button secondary" href="https://github.com/Packrift/packaging-optimization-benchmark-corpus/tree/main/examples/ortools-carton-selection">Open source example</a></div></section>
+      <section class="panel"><h2>Baseline example</h2><p>The repository includes a small OR-Tools CP-SAT carton-selection example and a solver-ready fixture pack. The fixture pack gives external bin-packing projects reusable CSV, JSON, and TXT inputs without requiring them to accept a promotional README link.</p><div class="links"><a class="button secondary" href="${baseUrl}/ortools-carton-selection-example.html">Open OR-Tools example</a><a class="button secondary" href="${baseUrl}/cartonization-solver-fixtures.html">Open solver fixtures</a><a class="button secondary" href="https://github.com/Packrift/packaging-optimization-benchmark-corpus/tree/main/examples/cartonization-fixtures">Open fixture source</a></div></section>
       <section class="panel"><h2>Limitations</h2>${list([
         "No separate open-data license is declared in this release; dataset-platform publication still requires a Packrift license decision.",
         "Static rows are generated from source snapshots and must not be used as live price, inventory, freight, or checkout facts.",
@@ -890,7 +935,7 @@ function buildIndexes(rows, urls, families) {
         "Fit approval, substitute approval, freight routing, damage risk, and purchase decisions require live Packrift verification.",
         "This page is a Packrift-owned technical resource; count it as owned public crawlable presence, not a third-party backlink or editorial citation.",
       ])}</section>
-      <section class="panel"><h2>Reproducibility artifacts</h2><div class="links"><a class="button secondary" href="${baseUrl}/data/quality-ledger.csv">Quality ledger CSV</a><a class="button secondary" href="${baseUrl}/data/manifest.json">Manifest JSON</a><a class="button secondary" href="${baseUrl}/data/datapackage.json">Data Package</a><a class="button secondary" href="${baseUrl}/data/croissant.json">Croissant metadata</a><a class="button secondary" href="${baseUrl}/data/seo-quality-audit.json">SEO audit JSON</a></div></section>`,
+      <section class="panel"><h2>Reproducibility artifacts</h2><div class="links"><a class="button secondary" href="${baseUrl}/data/quality-ledger.csv">Quality ledger CSV</a><a class="button secondary" href="${baseUrl}/data/manifest.json">Manifest JSON</a><a class="button secondary" href="${baseUrl}/data/datapackage.json">Data Package</a><a class="button secondary" href="${baseUrl}/data/croissant.json">Croissant metadata</a><a class="button secondary" href="${baseUrl}/data/cartonization-fixtures/fixture_cartons.csv">Fixture cartons CSV</a><a class="button secondary" href="${baseUrl}/data/seo-quality-audit.json">SEO audit JSON</a></div></section>`,
     schema: graphSchema([
       {
         "@type": "TechArticle",
@@ -916,6 +961,64 @@ function buildIndexes(rows, urls, families) {
     breadcrumbs: [
       { name: "Benchmark corpus", url: `${baseUrl}/` },
       { name: "Benchmark note", url: `${baseUrl}/cartonization-benchmark-note.html` },
+    ],
+  }), urls);
+
+  const fixtureRows = fixtureFiles.map((file) => `<tr><td><a href="${baseUrl}/data/${file.path}">${esc(file.title)}</a></td><td>${esc(file.format)}</td><td>${esc(file.description)}</td></tr>`).join("\n");
+  const fixtureDescription = "Solver-ready Packrift cartonization fixture pack with CSV, JSON, and TXT inputs for ecommerce bin-packing and carton-selection examples.";
+  writeFile("cartonization-solver-fixtures.html", pageShell({
+    title: "Packrift cartonization solver fixtures",
+    description: fixtureDescription,
+    canonical: `${baseUrl}/cartonization-solver-fixtures.html`,
+    body: `<h1>Cartonization solver fixtures</h1>
+      <p class="notice">This fixture pack converts a small, source-backed Packrift carton subset into reusable solver input formats. It is built for maintainers who need runnable data, not a generic resource-list backlink.</p>
+      <section class="panel"><h2>What is included</h2><table><thead><tr><th>File</th><th>Format</th><th>Use</th></tr></thead><tbody>${fixtureRows}</tbody></table></section>
+      <section class="panel"><h2>Use cases</h2>${list([
+        "Parser tests for ecommerce carton dimensions and repeated item counts.",
+        "Small examples for Python, C#, Java, or quantum/classical bin-packing demos.",
+        "Regression fixtures that verify SKU, dimensions, and product URL attribution survive format conversion.",
+        "Baseline comparisons before teams add full 3D packing, material, freight, or live checkout logic.",
+      ])}</section>
+      <section class="panel"><h2>Boundaries</h2>${list([
+        "The fixture pack is intentionally small and deterministic; it is not a claim of optimal packing solutions.",
+        "Current price, inventory, freight, checkout, and fit approval stay on Packrift.com.",
+        "The fixture files should be copied or adapted only where they add tests, parser coverage, or runnable examples.",
+      ])}</section>
+      <section class="panel"><h2>Source links</h2><div class="links"><a class="button secondary" href="https://github.com/Packrift/packaging-optimization-benchmark-corpus/tree/main/examples/cartonization-fixtures">GitHub fixture directory</a><a class="button secondary" href="${baseUrl}/cartonization-benchmark-note.html">Benchmark note</a><a class="button secondary" href="${baseUrl}/ortools-carton-selection-example.html">OR-Tools example</a></div></section>`,
+    schema: graphSchema([
+      {
+        "@type": "TechArticle",
+        headline: "Packrift cartonization solver fixtures",
+        description: fixtureDescription,
+        datePublished: artifactDate,
+        dateModified: artifactDate,
+        author: { "@type": "Organization", name: "Packrift", url: "https://packrift.com/" },
+        publisher: { "@type": "Organization", name: "Packrift", url: "https://packrift.com/" },
+        mainEntityOfPage: `${baseUrl}/cartonization-solver-fixtures.html`,
+        about: [
+          { "@type": "Thing", name: "cartonization fixtures" },
+          { "@type": "Thing", name: "bin packing input data" },
+          {
+            "@type": "Dataset",
+            name: "Packrift cartonization solver fixture pack",
+            url: `${baseUrl}/cartonization-solver-fixtures.html`,
+            distribution: fixtureFiles.map((file) => ({
+              "@type": "DataDownload",
+              name: file.title,
+              encodingFormat: file.mediatype,
+              contentUrl: `${baseUrl}/data/${file.path}`,
+            })),
+          },
+        ],
+      },
+      breadcrumbSchema([
+        { name: "Benchmark corpus", url: `${baseUrl}/` },
+        { name: "Solver fixtures", url: `${baseUrl}/cartonization-solver-fixtures.html` },
+      ]),
+    ]),
+    breadcrumbs: [
+      { name: "Benchmark corpus", url: `${baseUrl}/` },
+      { name: "Solver fixtures", url: `${baseUrl}/cartonization-solver-fixtures.html` },
     ],
   }), urls);
 
@@ -992,7 +1095,7 @@ python carton_selection.py</code></pre></section>
     title: "Packrift benchmark corpus dataset metadata",
     description: metadataDescription,
     canonical: `${baseUrl}/dataset-metadata.html`,
-    body: `<h1>Dataset metadata</h1><p>The corpus publishes standards-based metadata so search engines, archive platforms, and dataset tools can understand the source ledger without relying on a closed platform upload.</p><section class="panel"><h2>Metadata files</h2><table><thead><tr><th>File</th><th>Format</th><th>Purpose</th></tr></thead><tbody>${metadataRows}</tbody></table></section><section class="panel"><h2>License status</h2><p>No separate open-data license is declared in this release. Dataset-platform publication still requires a Packrift license decision plus account authentication where applicable.</p></section><section class="panel"><h2>Primary corpus files</h2><div class="links"><a class="button secondary" href="${baseUrl}/data/quality-ledger.csv">Quality ledger CSV</a><a class="button secondary" href="${baseUrl}/data/manifest.json">Manifest JSON</a><a class="button secondary" href="${baseUrl}/data/seo-quality-audit.json">SEO audit JSON</a></div></section>`,
+    body: `<h1>Dataset metadata</h1><p>The corpus publishes standards-based metadata so search engines, archive platforms, and dataset tools can understand the source ledger without relying on a closed platform upload.</p><section class="panel"><h2>Metadata files</h2><table><thead><tr><th>File</th><th>Format</th><th>Purpose</th></tr></thead><tbody>${metadataRows}</tbody></table></section><section class="panel"><h2>License status</h2><p>No separate open-data license is declared in this release. Dataset-platform publication still requires a Packrift license decision plus account authentication where applicable.</p></section><section class="panel"><h2>Primary corpus files</h2><div class="links"><a class="button secondary" href="${baseUrl}/data/quality-ledger.csv">Quality ledger CSV</a><a class="button secondary" href="${baseUrl}/data/manifest.json">Manifest JSON</a><a class="button secondary" href="${baseUrl}/data/seo-quality-audit.json">SEO audit JSON</a><a class="button secondary" href="${baseUrl}/cartonization-solver-fixtures.html">Solver fixtures</a></div></section>`,
     schema: metadataIndexSchema(`${baseUrl}/dataset-metadata.html`, metadataDescription),
     breadcrumbs: [
       { name: "Benchmark corpus", url: `${baseUrl}/` },
@@ -1053,6 +1156,7 @@ function writeSupportFiles(urls, rows, families) {
   fs.mkdirSync(path.join(outDir, "data"), { recursive: true });
   fs.writeFileSync(path.join(root, "quality-ledger.csv"), qualityCsv);
   fs.writeFileSync(path.join(outDir, "data/quality-ledger.csv"), qualityCsv);
+  copyFixtureFiles();
   const manifest = {
     artifactDate,
     baseUrl,
@@ -1072,6 +1176,7 @@ function writeSupportFiles(urls, rows, families) {
         "No invented dimensions, fit, freight, price, or approval claims.",
         "Static snapshots defer live commerce facts to Packrift.com.",
         "Every SKU page has a page-type-specific benchmark and checklist.",
+        "Solver fixture files are small deterministic inputs, not claims of known optimal solutions.",
         "Owned URL-scale resource content is not counted as third-party backlinks.",
       ],
     },
@@ -1079,6 +1184,19 @@ function writeSupportFiles(urls, rows, families) {
   fs.writeFileSync(path.join(root, "manifest.json"), `${JSON.stringify(manifest, null, 2)}\n`);
   fs.writeFileSync(path.join(outDir, "data/manifest.json"), `${JSON.stringify(manifest, null, 2)}\n`);
   writeDatasetMetadataFiles(rows, families, manifest);
+}
+
+function copyFixtureFiles() {
+  const targetDir = path.join(outDir, "data", fixtureDataDir);
+  fs.mkdirSync(targetDir, { recursive: true });
+  for (const file of fixtureFiles) {
+    const sourceRel = file.path.replace(`${fixtureDataDir}/`, "");
+    const sourcePath = path.join(fixtureSourceDir, sourceRel);
+    if (!fs.existsSync(sourcePath)) {
+      throw new Error(`Missing fixture source file: ${sourcePath}`);
+    }
+    fs.copyFileSync(sourcePath, path.join(outDir, "data", file.path));
+  }
 }
 
 function writeJsonPair(rel, payload) {
@@ -1119,6 +1237,7 @@ function writeDatasetMetadataFiles(rows, families, manifest) {
       mediatype: "application/json",
       format: "json",
     },
+    ...fixtureFiles,
   ];
 
   writeJsonPair("datapackage.json", {

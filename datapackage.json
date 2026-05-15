@@ -45,6 +45,46 @@
       "description": "Generated quality audit covering HTML files, sitemaps, canonical URLs, and structured data.",
       "mediatype": "application/json",
       "format": "json"
+    },
+    {
+      "name": "fixture-cartons",
+      "path": "https://packrift.github.io/packaging-optimization-benchmark-corpus/data/cartonization-fixtures/fixture_cartons.csv",
+      "title": "Carton fixture CSV",
+      "description": "Five static Packrift carton candidates with SKU, dimensions, and product URLs.",
+      "mediatype": "text/csv",
+      "format": "csv"
+    },
+    {
+      "name": "fixture-orders",
+      "path": "https://packrift.github.io/packaging-optimization-benchmark-corpus/data/cartonization-fixtures/fixture_orders.csv",
+      "title": "Order fixture CSV",
+      "description": "Four demo ecommerce order rows with item dimensions and counts.",
+      "mediatype": "text/csv",
+      "format": "csv"
+    },
+    {
+      "name": "py3dbp-fixture",
+      "path": "https://packrift.github.io/packaging-optimization-benchmark-corpus/data/cartonization-fixtures/py3dbp_fixture.json",
+      "title": "py3dbp-style fixture JSON",
+      "description": "Generic bins/items JSON shaped for Python 3D bin-packing examples.",
+      "mediatype": "application/json",
+      "format": "json"
+    },
+    {
+      "name": "dwave-ecommerce-cartons",
+      "path": "https://packrift.github.io/packaging-optimization-benchmark-corpus/data/cartonization-fixtures/dwave_sample_data_ecommerce_cartons.txt",
+      "title": "D-Wave 3D bin-packing sample TXT",
+      "description": "Small ecommerce-carton instance using the D-Wave 3D bin-packing example input shape.",
+      "mediatype": "text/plain",
+      "format": "txt"
+    },
+    {
+      "name": "fixture-readme",
+      "path": "https://packrift.github.io/packaging-optimization-benchmark-corpus/data/cartonization-fixtures/README.md",
+      "title": "Fixture pack README",
+      "description": "Source notes, limitations, and format guidance for the solver fixture pack.",
+      "mediatype": "text/markdown",
+      "format": "md"
     }
   ],
   "custom": {

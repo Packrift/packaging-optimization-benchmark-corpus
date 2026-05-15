@@ -6,8 +6,8 @@
   "sourceRows": 1000,
   "pageTypes": 24,
   "skuPages": 24000,
-  "sitemapUrls": 24038,
-  "htmlFiles": 24039,
+  "sitemapUrls": 24039,
+  "htmlFiles": 24040,
   "families": {
     "mailers": 207,
     "boxes": 260,
@@ -24,6 +24,7 @@
       "No invented dimensions, fit, freight, price, or approval claims.",
       "Static snapshots defer live commerce facts to Packrift.com.",
       "Every SKU page has a page-type-specific benchmark and checklist.",
+      "Solver fixture files are small deterministic inputs, not claims of known optimal solutions.",
       "Owned URL-scale resource content is not counted as third-party backlinks."
     ]
   }

@@ -28,6 +28,26 @@
     {
       "path": "seo-quality-audit.json",
       "description": "Generated quality audit covering HTML files, sitemaps, canonical URLs, and structured data."
+    },
+    {
+      "path": "cartonization-fixtures/fixture_cartons.csv",
+      "description": "Five static Packrift carton candidates with SKU, dimensions, and product URLs."
+    },
+    {
+      "path": "cartonization-fixtures/fixture_orders.csv",
+      "description": "Four demo ecommerce order rows with item dimensions and counts."
+    },
+    {
+      "path": "cartonization-fixtures/py3dbp_fixture.json",
+      "description": "Generic bins/items JSON shaped for Python 3D bin-packing examples."
+    },
+    {
+      "path": "cartonization-fixtures/dwave_sample_data_ecommerce_cartons.txt",
+      "description": "Small ecommerce-carton instance using the D-Wave 3D bin-packing example input shape."
+    },
+    {
+      "path": "cartonization-fixtures/README.md",
+      "description": "Source notes, limitations, and format guidance for the solver fixture pack."
     }
   ]
 }

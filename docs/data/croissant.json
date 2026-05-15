@@ -54,6 +54,36 @@
       "name": "SEO quality audit",
       "encodingFormat": "application/json",
       "contentUrl": "https://packrift.github.io/packaging-optimization-benchmark-corpus/data/seo-quality-audit.json"
+    },
+    {
+      "@type": "DataDownload",
+      "name": "Carton fixture CSV",
+      "encodingFormat": "text/csv",
+      "contentUrl": "https://packrift.github.io/packaging-optimization-benchmark-corpus/data/cartonization-fixtures/fixture_cartons.csv"
+    },
+    {
+      "@type": "DataDownload",
+      "name": "Order fixture CSV",
+      "encodingFormat": "text/csv",
+      "contentUrl": "https://packrift.github.io/packaging-optimization-benchmark-corpus/data/cartonization-fixtures/fixture_orders.csv"
+    },
+    {
+      "@type": "DataDownload",
+      "name": "py3dbp-style fixture JSON",
+      "encodingFormat": "application/json",
+      "contentUrl": "https://packrift.github.io/packaging-optimization-benchmark-corpus/data/cartonization-fixtures/py3dbp_fixture.json"
+    },
+    {
+      "@type": "DataDownload",
+      "name": "D-Wave 3D bin-packing sample TXT",
+      "encodingFormat": "text/plain",
+      "contentUrl": "https://packrift.github.io/packaging-optimization-benchmark-corpus/data/cartonization-fixtures/dwave_sample_data_ecommerce_cartons.txt"
+    },
+    {
+      "@type": "DataDownload",
+      "name": "Fixture pack README",
+      "encodingFormat": "text/markdown",
+      "contentUrl": "https://packrift.github.io/packaging-optimization-benchmark-corpus/data/cartonization-fixtures/README.md"
     }
   ],
   "recordSet": [
